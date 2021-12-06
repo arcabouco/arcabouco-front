@@ -39,8 +39,15 @@ export default class MyDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
 
+          <meta name="theme-color" content="#133754" />
+
           <link
-            href="https://fonts.googleapis.com/css?family=Roboto:400,500,700"
+            href="https://fonts.googleapis.com/css?family=Roboto:200,400,500,700"
+            rel="stylesheet"
+          />
+
+          <link
+            href="http://fonts.cdnfonts.com/css/niagara-solid"
             rel="stylesheet"
           />
 
