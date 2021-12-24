@@ -9,6 +9,6 @@ export const Software = (generateChildren = false): SoftwareEntity => ({
   id: faker.datatype.uuid(),
   link: faker.internet.url(),
   name: faker.lorem.word(),
-  tags: generateChildren ? randomArrayOf(Tag) : [],
+  tags: generateChildren ? randomArrayOf(Tag, 5, 15) : [],
   updatedAt: faker.date.recent()
 })

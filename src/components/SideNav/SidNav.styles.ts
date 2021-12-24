@@ -12,6 +12,7 @@ export const Container = styled.nav<{ opened: boolean }>`
   transition: all 0.3s ease;
 
   padding: 2rem 2rem 0rem;
+
 `
 export const Title = styled.h3`
   display: flex;

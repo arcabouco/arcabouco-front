@@ -3,13 +3,13 @@ import styled from 'styled-components'
 import { Tag } from '../../api/interfaces/Tag'
 import { TagCategory } from '../../api/interfaces/TagCategory'
 
-export const SelectorContainer = styled.div`
-  display: flex;
+export const SelectorContainer = styled.div<{ isOpened: boolean }>`
+  display: ${({ isOpened }) => (isOpened ? 'flex' : 'none')};
   flex-direction: column;
   align-items: left;
 
   width: 15rem;
-  height: auto;
+  height: 60vh;
   max-height: 25rem;
   gap: 1rem;
   padding: 1rem 1rem 1rem;
@@ -17,7 +17,22 @@ export const SelectorContainer = styled.div`
 
   background: #eeeeee;
 `
+export const Header = styled.header`
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: left;
+  min-height: 3rem;
+`
+
 export const Title = styled.h3``
+
+export const SubTitle = styled.h4<{ selectedCategory: TagCategory }>`
+  display: ${({ selectedCategory }) =>
+    selectedCategory.id ? 'block' : 'none'};
+  color: #313131;
+  font-size: 1rem;
+`
 
 type CategoryProps = {
   selectedCategory: TagCategory

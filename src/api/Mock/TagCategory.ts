@@ -10,6 +10,6 @@ export const TagCategory = (generateChildren = false): TagCategoryEntity => ({
   id: faker.datatype.uuid(),
   isMultiTag: faker.datatype.boolean(),
   name: faker.lorem.word(),
-  tags: generateChildren ? randomArrayOf(Tag, 3) : [],
+  tags: generateChildren ? randomArrayOf(Tag, 5, 15) : [],
   updatedAt: faker.date.recent()
 })
