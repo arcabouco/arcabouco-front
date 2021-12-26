@@ -6,7 +6,7 @@ import { Menu } from 'styled-icons/boxicons-regular'
 export const HomeContainer = styled.div`
   height: 100vh;
   width: 100vw;
-  background: white;
+  background: grey;
 `
 
 export const MainContainer = styled.main`

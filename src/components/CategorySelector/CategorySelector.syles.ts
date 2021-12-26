@@ -45,7 +45,7 @@ export const Categories = styled.ul<CategoryProps>`
   padding-right: 0.8rem;
 
   gap: 0.8rem;
-  overflow: scroll;
+  overflow-x: scroll;
 
   list-style-type: none;
 `
