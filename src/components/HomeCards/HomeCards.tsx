@@ -5,15 +5,17 @@ import {
   Card,
   CardContainer,
   Description,
-  AtomIcon,
-  RocketIcon
+  RocketIcon,
+  ScrollContainer,
+  Container,
+  AtomIcon
 } from './HomeCards.styles'
-import { FakeCard, Container } from './HomeCards.styles'
+import { FakeCard } from './HomeCards.styles'
+
+import Atom from '../../assets/atom.svg'
 
 export const HomeCards = () => {
   const [scroll, setScroll] = useState(0)
-  const [max, setMax] = useState(0)
-  const [current, setCurrent] = useState(0)
 
   const handlerScroll: UIEventHandler = event => {
     const scrollLeft = event.target.scrollLeft
@@ -25,21 +27,27 @@ export const HomeCards = () => {
 
   const handleCardClick = (newScroll: number) => (event: any) => {
     const scrollContent: HTMLDivElement =
-      event.target.parentElement.parentElement
+      event.target.parentElement.parentElement.children[0]
 
     const maxScrollLeft = scrollContent.scrollWidth - scrollContent.clientWidth
     scrollContent.scrollTo(maxScrollLeft * newScroll, 0)
+    console.log(event.target)
+    console.log(scrollContent)
   }
 
   return (
-    <Container onScroll={handlerScroll}>
-      <FakeCard />
-      <FakeCard />
+    <Container>
+      <ScrollContainer onScroll={handlerScroll}>
+        <FakeCard />
+        <FakeCard />
+      </ScrollContainer>
 
       <CardContainer>
         <Card
-          onClick={handleCardClick(1)}
-          style={{ transform: `scale(${scroll * 0.4 + 1})` }}
+          onClick={handleCardClick(0)}
+          style={{
+            transform: `scale(${(1 - scroll) * 0.25 + 1}) translateY(-3%)`
+          }}
         >
           <AtomIcon />
           <Description>
@@ -49,8 +57,10 @@ export const HomeCards = () => {
         </Card>
 
         <Card
-          onClick={handleCardClick(0)}
-          style={{ transform: `scale(${(1 - scroll) * 0.4 + 1})` }}
+          onClick={handleCardClick(1)}
+          style={{
+            transform: `scale(${scroll * 0.25 + 1}) translateY(-3%)`
+          }}
         >
           <RocketIcon />
           <Description>
