@@ -56,13 +56,16 @@ export const FakeCard = styled.div`
 
 export const CardContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-start;
-  padding: 0 6vw;
+  gap: 7%;
 
   background: transparent;
   height: 100% !important;
   width: 100%;
+
+  /* position: absolute; */
+  /* top: 0.1vh; */
 `
 
 export const Card = styled.div`
@@ -70,25 +73,22 @@ export const Card = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 15%;
 
   background: #e5e8ef;
 
-  width: 40vw;
-  height: 80%;
-  max-width: 150px;
+  width: 38%;
+  height: 65%;
   border-radius: 0.8rem;
-  padding: 0 min(3vw, 10px);
-  margin: 0 3vw;
+  padding: 8% 1rem 6% 1rem;
 
   transition: transform 0.1s;
   /* right: 10rem; */
 `
 
 export const AtomIcon = styled(Atom)`
-  width: auto;
-  height: 15%;
-
+  width: min-content;
+  height: 25%;
 
   path {
     fill: #a9b6d2;
@@ -96,8 +96,8 @@ export const AtomIcon = styled(Atom)`
 `
 
 export const RocketIcon = styled(Rocket)`
-  width: auto;
-  height: 15%;
+  width: min-content;
+  height: 25%;
   color: #a9b6d2;
   pointer-events: none;
 `
@@ -106,10 +106,10 @@ export const Description = styled.span`
   width: 100%;
   pointer-events: none;
 
-  font: 400 85% Roboto, sans-serif;
+  font: 400 3.8vw Roboto, sans-serif;
   color: #646566;
 
-  line-height: 130%;
+  line-height: 5vw;
   letter-spacing: 0.02em;
 `
 
@@ -123,10 +123,10 @@ export const Button = styled.button<ButtonProps>`
   align-items: center;
 
   width: 100%;
-  height: 14%;
+  height: 5vh !important;
   border-radius: 1.5rem;
 
-  font: 700 90% Roboto, sans-serif;
+  font: 700 1.8vh Roboto, sans-serif;
   color: #fff;
 
   background: ${props => (Math.round(props.scroll) ? '#C5D3FF' : '#3252d0')};

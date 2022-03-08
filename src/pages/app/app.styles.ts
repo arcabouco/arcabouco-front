@@ -6,6 +6,7 @@ export const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vw;
+  color: #fff;
 `
 
 export const AddButtonContainer = styled.div`

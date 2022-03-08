@@ -9,8 +9,8 @@ import {
   ScrollContainer,
   Container,
   AtomIcon
-} from './HomeCards.styles'
-import { FakeCard } from './HomeCards.styles'
+} from './HomeCardsOld.styles'
+import { FakeCard } from './HomeCardsOld.styles'
 
 import Atom from '../../assets/atom.svg'
 import Link from 'next/link'
@@ -32,6 +32,8 @@ export const HomeCards = () => {
 
     const maxScrollLeft = scrollContent.scrollWidth - scrollContent.clientWidth
     scrollContent.scrollTo(maxScrollLeft * newScroll, 0)
+    console.log(event.target)
+    console.log(scrollContent)
   }
 
   return (
@@ -45,7 +47,7 @@ export const HomeCards = () => {
         <Card
           onClick={handleCardClick(0)}
           style={{
-            transform: `scale(${(1 - scroll) * 0.2 + 1}) translateY(-3%)`
+            transform: `scale(${(1 - scroll) * 0.25 + 1}) translateY(-3%)`
           }}
         >
           <AtomIcon />
@@ -60,7 +62,7 @@ export const HomeCards = () => {
         <Card
           onClick={handleCardClick(1)}
           style={{
-            transform: `scale(${scroll * 0.2 + 1}) translateY(-3%)`
+            transform: `scale(${scroll * 0.25 + 1}) translateY(-3%)`
           }}
         >
           <RocketIcon />

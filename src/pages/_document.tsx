@@ -42,7 +42,7 @@ export default class MyDocument extends Document {
           <meta name="theme-color" content="#133754" />
 
           <link
-            href="https://fonts.googleapis.com/css?family=Roboto:200,400,500,700"
+            href="https://fonts.googleapis.com/css?family=Roboto:200,300,400,500,600,700,800"
             rel="stylesheet"
           />
 
@@ -50,11 +50,7 @@ export default class MyDocument extends Document {
             href="http://fonts.cdnfonts.com/css/niagara-solid"
             rel="stylesheet"
           />
-
-          <link
-            rel="icon"
-            href="https://img.icons8.com/material-outlined/24/000000/test.png"
-          />
+          <link rel="icon" type="image/svg+xml" href="/arcabouco-logo.svg" />
         </Head>
 
         <body>

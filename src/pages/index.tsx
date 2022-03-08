@@ -9,16 +9,15 @@ import {
   InfoItem,
   InfoList,
   MainContainer,
-  MenuButton,
   MenuBUttonContainer,
   MoreInfo,
   Title
 } from './home.styles'
 
 import { useState } from 'react'
-import Image from 'next/image'
 
 import { HomeCards } from '../components/HomeCards/HomeCards'
+import { MenuButton } from '../components/MenuButton/MenuButton.styles'
 
 const Home: NextPage = () => {
   const [menuOpened, setMenuOpened] = useState(false)
