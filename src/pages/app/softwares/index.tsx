@@ -1,4 +1,6 @@
 import {
+  FilterButton,
+  FilterIcon,
   IconContainer,
   List,
   SoftwareCard,
@@ -12,144 +14,60 @@ import Image from 'next/image'
 import TestImage from '../../../../public/image.png'
 import { TopBar } from '../../../components/TopBar/TopBar'
 import Link from 'next/link'
+import { Popover } from 'react-tiny-popover'
+import { useEffect, useState } from 'react'
+import { CategorySelector } from '../../../components/CategorySelector/CategorySelector'
+import * as Mock from '../../../api/Mock'
+import { Software } from '../../../api/interfaces/Software'
+import * as Request from '../../../api/Request'
 
 const SoftwareListPage = () => {
+  const [isFilterOpen, setIsFilterOpen] = useState(false)
+
+  const [categories, setCategories] = useState(
+    Mock.randomArrayOf(() => Mock.TagCategory(true), 10, 20)
+  )
+
+  const [softwares, setSoftwares] = useState([] as Software[])
+
+  useEffect(() => {
+    Request.listSoftwares().then(setSoftwares)
+  }, [])
+
   return (
-    <SoftwareListPageContainer>
+    <SoftwareListPageContainer noScroll={isFilterOpen}>
+      <CategorySelector
+        categories={categories}
+        isOpened={isFilterOpen}
+        setIsOpened={setIsFilterOpen}
+      >
+        <FilterButton onClick={() => setIsFilterOpen(!isFilterOpen)}>
+          <FilterIcon />
+        </FilterButton>
+      </CategorySelector>
+
       <TopBar />
 
       <Title>
-        <b>+500</b> softwares listados
+        <b>{softwares.length}</b> softwares listados
       </Title>
 
       <List>
-        <Link href={'/app/softwares/1234'}>
-          <SoftwareCard>
-            <IconContainer>
-              <Image src={TestImage} />
-            </IconContainer>
-            <SoftwareInformation>
-              <SoftwareName>Converber</SoftwareName>
-              <SoftwareDescription>
-                Loren i consectetur adipiscing elit, sed do eiusmod tempor. fsda
-                fs kf fkds fds fsd jkf fsk gsl fdsaf dsa fds fds fas d fdsf
-                dsafd sfdsf asdf asd ffs fs fd fjkds hfjk f
-              </SoftwareDescription>
-            </SoftwareInformation>
-          </SoftwareCard>
-        </Link>
-
-        <Link href={'/app/softwares/1234'}>
-          <SoftwareCard>
-            <IconContainer>
-              <Image src={TestImage} />
-            </IconContainer>
-            <SoftwareInformation>
-              <SoftwareName>Converber</SoftwareName>
-              <SoftwareDescription>
-                Loren i consectetur adipiscing elit, sed do eiusmod tempor. fsda
-                fs kf fkds fds fsd jkf fsk gsl fdsaf dsa fds fds fas d fdsf
-                dsafd sfdsf asdf asd ffs fs fd fjkds hfjk f
-              </SoftwareDescription>
-            </SoftwareInformation>
-          </SoftwareCard>
-        </Link>
-
-        <Link href={'/app/softwares/1234'}>
-          <SoftwareCard>
-            <IconContainer>
-              <Image src={TestImage} />
-            </IconContainer>
-            <SoftwareInformation>
-              <SoftwareName>Converber</SoftwareName>
-              <SoftwareDescription>
-                Loren i consectetur adipiscing elit, sed do eiusmod tempor. fsda
-                fs kf fkds fds fsd jkf fsk gsl fdsaf dsa fds fds fas d fdsf
-                dsafd sfdsf asdf asd ffs fs fd fjkds hfjk f
-              </SoftwareDescription>
-            </SoftwareInformation>
-          </SoftwareCard>
-        </Link>
-
-        <Link href={'/app/softwares/1234'}>
-          <SoftwareCard>
-            <IconContainer>
-              <Image src={TestImage} />
-            </IconContainer>
-            <SoftwareInformation>
-              <SoftwareName>Converber</SoftwareName>
-              <SoftwareDescription>
-                Loren i consectetur adipiscing elit, sed do eiusmod tempor. fsda
-                fs kf fkds fds fsd jkf fsk gsl fdsaf dsa fds fds fas d fdsf
-                dsafd sfdsf asdf asd ffs fs fd fjkds hfjk f
-              </SoftwareDescription>
-            </SoftwareInformation>
-          </SoftwareCard>
-        </Link>
-
-        <Link href={'/app/softwares/1234'}>
-          <SoftwareCard>
-            <IconContainer>
-              <Image src={TestImage} />
-            </IconContainer>
-            <SoftwareInformation>
-              <SoftwareName>Converber</SoftwareName>
-              <SoftwareDescription>
-                Loren i consectetur adipiscing elit, sed do eiusmod tempor. fsda
-                fs kf fkds fds fsd jkf fsk gsl fdsaf dsa fds fds fas d fdsf
-                dsafd sfdsf asdf asd ffs fs fd fjkds hfjk f
-              </SoftwareDescription>
-            </SoftwareInformation>
-          </SoftwareCard>
-        </Link>
-
-        <Link href={'/app/softwares/1234'}>
-          <SoftwareCard>
-            <IconContainer>
-              <Image src={TestImage} />
-            </IconContainer>
-            <SoftwareInformation>
-              <SoftwareName>Converber</SoftwareName>
-              <SoftwareDescription>
-                Loren i consectetur adipiscing elit, sed do eiusmod tempor. fsda
-                fs kf fkds fds fsd jkf fsk gsl fdsaf dsa fds fds fas d fdsf
-                dsafd sfdsf asdf asd ffs fs fd fjkds hfjk f
-              </SoftwareDescription>
-            </SoftwareInformation>
-          </SoftwareCard>
-        </Link>
-
-        <Link href={'/app/softwares/1234'}>
-          <SoftwareCard>
-            <IconContainer>
-              <Image src={TestImage} />
-            </IconContainer>
-            <SoftwareInformation>
-              <SoftwareName>Converber</SoftwareName>
-              <SoftwareDescription>
-                Loren i consectetur adipiscing elit, sed do eiusmod tempor. fsda
-                fs kf fkds fds fsd jkf fsk gsl fdsaf dsa fds fds fas d fdsf
-                dsafd sfdsf asdf asd ffs fs fd fjkds hfjk f
-              </SoftwareDescription>
-            </SoftwareInformation>
-          </SoftwareCard>
-        </Link>
-
-        <Link href={'/app/softwares/1234'}>
-          <SoftwareCard>
-            <IconContainer>
-              <Image src={TestImage} />
-            </IconContainer>
-            <SoftwareInformation>
-              <SoftwareName>Converber</SoftwareName>
-              <SoftwareDescription>
-                Loren i consectetur adipiscing elit, sed do eiusmod tempor. fsda
-                fs kf fkds fds fsd jkf fsk gsl fdsaf dsa fds fds fas d fdsf
-                dsafd sfdsf asdf asd ffs fs fd fjkds hfjk f
-              </SoftwareDescription>
-            </SoftwareInformation>
-          </SoftwareCard>
-        </Link>
+        {softwares.map(software => (
+          <Link href={`/app/softwares/${software.id}`} key={software.id}>
+            <SoftwareCard>
+              <IconContainer>
+                <Image src={TestImage} />
+              </IconContainer>
+              <SoftwareInformation>
+                <SoftwareName>{software.name}</SoftwareName>
+                <SoftwareDescription>
+                  {software.description}
+                </SoftwareDescription>
+              </SoftwareInformation>
+            </SoftwareCard>
+          </Link>
+        ))}
       </List>
     </SoftwareListPageContainer>
   )

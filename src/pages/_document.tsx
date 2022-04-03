@@ -46,8 +46,14 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           />
 
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
-            href="http://fonts.cdnfonts.com/css/niagara-solid"
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin=""
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Sora:wght@300;400;500&display=swap"
             rel="stylesheet"
           />
           <link rel="icon" type="image/svg+xml" href="/arcabouco-logo.svg" />

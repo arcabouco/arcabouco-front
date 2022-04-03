@@ -5,7 +5,7 @@ export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  background: #f5f6fb;
+  background: #0f2850;
 
   width: 100%;
   min-height: min-content;

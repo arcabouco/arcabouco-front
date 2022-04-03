@@ -1,47 +1,134 @@
-import styled from 'styled-components'
+import { ComponentType } from 'react'
+import styled, { css } from 'styled-components'
+import Arcabouco from '../assets/arcabouco-logo.svg'
+import { Logout, Person } from 'styled-icons/material'
 
-export const Container = styled.nav<{ opened: boolean }>`
+export const Container = styled.div<{ opened: boolean }>`
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  background: #000;
+  opacity: ${props => (props.opened ? '0.7' : '0')};
+  pointer-events: ${props => (props.opened ? 'auto' : 'none')};
+  display: ${props => (props.opened ? 'block' : 'none')};
+`
+
+export const Bar = styled.nav<{ opened: boolean }>`
   position: fixed;
   background: #fff;
-  width: 70%;
-  max-width: 14rem;
+  width: 65vw;
+  max-width: 16rem;
   height: 100vh;
   left: ${props => (props.opened ? '0' : '-100%')};
+  /* background: red; */
 
-  z-index: 100;
-  transition: all 0.3s ease;
-
-  padding: 2rem 2rem 0rem;
-
-`
-export const Title = styled.h3`
-  display: flex;
-  color: #363636;
-  font-size: 1.6rem;
+  z-index: 101;
 `
 
-export const Menu = styled.ul`
-  width: 100%;
-
+export const Header = styled.header`
   display: flex;
   flex-direction: column;
-  align-items: center;
-
-  padding-top: 2.5rem;
+  align-items: flex-start;
+  gap: 0.8rem;
+  background: #122c52;
+  /* height: 10rem; */
+  padding: 1rem 1rem;
+  width: 100%;
 `
 
-export const MenuItem = styled.li<{ selected: boolean }>`
-  :first-of-type {
-    border-top: 0.07rem solid #363636;
+export const LogoutButton = styled.button`
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  transition: all 0.5s;
+  color: #8695a0;
+
+  :active {
+    color: #fff;
   }
+`
 
-  width: 95%;
-  padding: 1rem 0;
-  border-bottom: 0.07rem solid #363636;
+export const LogoutLabel = styled.span`
+  font-size: 1rem;
+`
 
-  list-style: none;
-  color: #121212;
+export const LogoutIcon = styled(Logout)`
+  width: 1.2rem;
+`
+
+export const ProfileContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+export const UserImage = styled(Person)`
+  width: 3rem;
+  color: #fff;
+`
+
+export const UserInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+`
+
+export const UserName = styled.h2`
+  font: 500 1rem Roboto, sans-serif;
+  color: #fff;
+`
+
+export const UserEmail = styled.span`
+  font: 400 0.8rem Roboto, sans-serif;
+  color: #fff;
+`
+
+export const GenericButton = styled.button`
+  border: 1px solid white;
+  border-radius: 0.5rem;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  transition: all 0.5s;
+
+  :active {
+    background: #fff;
+  }
+`
+
+export const LogoutInfo = styled.span`
+  color: #fff;
+  font: 400 0.8rem Sora, sans-serif;
   text-align: center;
+`
 
-  text-decoration: ${props => (props.selected ? 'underline' : 'none')};
+export const Menu = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 1.2rem 1.2rem;
+`
+
+export const MenuItemContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+`
+
+export const MenuItemIconStyle = (c: ComponentType) => styled(c)<{
+  selected: boolean
+}>`
+  width: 2rem;
+  color: ${props => (props.selected ? '#122c52' : '#8695a0')};
+`
+
+export const MenuItemLabel = styled.div<{ selected: boolean }>`
+  font: 400 1.1rem Roboto, sans-serif;
+  color: ${props => (props.selected ? '#122c52' : '#8695a0')};
 `

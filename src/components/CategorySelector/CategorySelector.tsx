@@ -1,27 +1,31 @@
 import React, { HTMLAttributes, useEffect, useState } from 'react'
 import { TagCategory } from '../../api/interfaces/TagCategory'
 import {
+  ApplyFilterButton,
   Categories,
-  Category,
-  DoneButton,
+  CategoryButton,
+  CategoryIcon,
+  CategoryLabel,
+  CloseButton,
   Footer,
   Header,
+  ResetFilterButton,
   SelectorContainer,
-  SubTitle,
   TagCheckBox,
   TagLabel,
-  Tags
+  Tags,
+  TagSelectionDoneButton,
+  TagsHeader,
+  Title
 } from './CategorySelector.syles'
-import { Title } from '../SideNav/SidNav.styles'
 import { Tag } from '../../api/interfaces/Tag'
-
-export type onDoneDTO = { category: TagCategory; tags: Tag[] }
 
 type CategorySelectorProps = {
   categories: TagCategory[]
-  onDone?: (dto: onDoneDTO) => void
+  onDone?: (categories: TagCategory[]) => void
   setIsOpened?: (isOpened: boolean) => void
   isOpened?: boolean
+  children: JSX.Element
 } & HTMLAttributes<HTMLDivElement>
 
 export const CategorySelector = ({
@@ -29,85 +33,137 @@ export const CategorySelector = ({
   isOpened = true,
   setIsOpened = () => {},
   onDone = () => {},
+  children,
   ...props
 }: CategorySelectorProps) => {
-  const [selectedCategory, setSelectedCategory] = useState({} as TagCategory)
-  const [selectedTags, setSelectedTags] = useState([] as Tag[])
+  const [currentTags, setCurrentTags] = useState([] as Tag[])
+  const [currentCategory, setCurrentCategory] = useState<TagCategory | null>(
+    null
+  )
+  const [selectedCategories, setSelectedCategories] = useState(
+    [] as TagCategory[]
+  )
 
-  const handleCategoryClick = (category: TagCategory) => () =>
-    setSelectedCategory(category)
-
-  const handleTagClick = (tag: Tag) => () => {
-    const selectedTagIndex = selectedTags.findIndex(
-      selectedTag => selectedTag.id === tag.id
+  const handleCategoryClick = (clickedCategory: TagCategory) => () => {
+    setCurrentCategory(clickedCategory)
+    const alreadySelectedTags = selectedCategories.find(
+      category => category.id === clickedCategory.id
     )
 
-    const tagExists = selectedTags[selectedTagIndex]
+    if (alreadySelectedTags) setCurrentTags(alreadySelectedTags.tags)
+    else setCurrentTags([])
+  }
 
-    if (tagExists)
-      setSelectedTags(
-        selectedTags.filter(selectedTag => selectedTag.id !== tag.id)
+  const handleTagClick = (clickedTag: Tag) => () => {
+    const alreadySelected = currentTags.find(
+      currentTag => currentTag.id === clickedTag.id
+    )
+
+    if (alreadySelected)
+      setCurrentTags(
+        currentTags.filter(selectedTag => selectedTag.id !== clickedTag.id)
       )
-    else setSelectedTags([...selectedTags, tag])
+    else setCurrentTags([...currentTags, clickedTag])
   }
 
-  const handleDoneClick = () => {
-    onDone({ category: selectedCategory, tags: selectedTags })
+  const handleTagSelectionDone = () => {
+    if (!currentCategory) return
+
+    const newSelectedCategory = { ...currentCategory }
+
+    newSelectedCategory.tags = currentTags
+
+    const newSelectedCategories = selectedCategories
+      .filter(selectedCategory => selectedCategory.id != newSelectedCategory.id)
+      .concat(newSelectedCategory.tags.length ? newSelectedCategory : [])
+
+    setCurrentCategory(null)
+    setCurrentTags([])
+    setSelectedCategories(newSelectedCategories)
+
+    console.log(newSelectedCategories)
   }
 
-  useEffect(() => {
-    setSelectedCategory({} as TagCategory)
-    setSelectedTags([])
-  }, [isOpened])
+  const handleApplyFilter = () => {
+    onDone(selectedCategories)
+    setIsOpened(false)
+  }
+
+  const handleResetFilter = () => {
+    setSelectedCategories([])
+    setCurrentTags([])
+    setCurrentCategory(null)
+  }
 
   return (
-    <SelectorContainer isOpened={isOpened} {...props}>
-      <Header>
-        <Title> {selectedCategory.id ? 'Tags' : 'Categorias'} </Title>
-        <SubTitle selectedCategory={selectedCategory}>
-          de {selectedCategory.name}
-        </SubTitle>
-      </Header>
+    <>
+      {children}
+      <SelectorContainer isOpened={isOpened} {...props}>
+        <Header>
+          <CloseButton onClick={() => setIsOpened(!isOpened)} />
+          <Title> Filtros </Title>
+        </Header>
 
-      <Categories selectedCategory={selectedCategory}>
-        {categories.map(category => (
-          <CategoryItem
-            key={category.id}
-            onClick={handleCategoryClick(category)}
-            category={category}
-          />
-        ))}
-      </Categories>
+        {currentCategory ? (
+          <>
+            <TagsHeader>
+              <CategoryItem category={currentCategory}></CategoryItem>
+            </TagsHeader>
+            <Tags>
+              {currentCategory.tags.map(tag => (
+                <TagItem
+                  tag={tag}
+                  selectedTags={currentTags}
+                  onClick={handleTagClick(tag)}
+                  key={tag.id}
+                />
+              ))}
+            </Tags>
+          </>
+        ) : (
+          <Categories>
+            {categories.map(category => (
+              <CategoryItem
+                key={category.id}
+                onClick={handleCategoryClick(category)}
+                category={category}
+              />
+            ))}
+          </Categories>
+        )}
 
-      <Tags selectedCategory={selectedCategory}>
-        {selectedCategory?.tags &&
-          selectedCategory.tags.map(tag => (
-            <TagItem
-              tag={tag}
-              selectedTags={selectedTags}
-              onClick={handleTagClick(tag)}
-              key={tag.id}
-            />
-          ))}
-      </Tags>
-
-      <Footer>
-        <DoneButton selectedTags={selectedTags} onClick={handleDoneClick}>
-          Ok
-        </DoneButton>
-      </Footer>
-    </SelectorContainer>
+        <Footer>
+          {currentCategory ? (
+            <TagSelectionDoneButton onClick={handleTagSelectionDone}>
+              Concluir
+            </TagSelectionDoneButton>
+          ) : (
+            <>
+              <ApplyFilterButton onClick={handleApplyFilter}>
+                APLICAR FILTRO
+              </ApplyFilterButton>
+              <ResetFilterButton onClick={handleResetFilter}>
+                LIMPAR FILTROS
+              </ResetFilterButton>
+            </>
+          )}
+        </Footer>
+      </SelectorContainer>
+    </>
   )
 }
 
 type CategoryItemProps = {
   category: TagCategory
-} & React.HTMLAttributes<HTMLLIElement>
+} & React.HTMLAttributes<HTMLDivElement>
 
 const CategoryItem = ({ category, ...props }: CategoryItemProps) => (
-  <li {...props}>
-    <Category> {category.name} </Category>
-  </li>
+  <div {...props}>
+    <CategoryButton>
+      <CategoryIcon />
+      <CategoryLabel>{category.name}</CategoryLabel>
+    </CategoryButton>
+  </div>
 )
 
 type TagItemProps = {
@@ -122,9 +178,9 @@ const TagItem = ({ tag, onClick, selectedTags }: TagItemProps) => (
       onClick={onClick}
       type="checkbox"
       id="tagInput"
-      defaultChecked={selectedTags.some(
-        selectedTag => selectedTag.id === tag.id
-      )}
+      defaultChecked={
+        !!selectedTags.find(selectedTag => selectedTag.id === tag.id)
+      }
     />
     {tag.name}
   </TagLabel>

@@ -1,14 +1,33 @@
 import styled from 'styled-components'
 import Image from 'next/image'
+import { Search } from 'styled-icons/material'
 
-export const SoftwareListPageContainer = styled.div`
+export const SoftwareListPageContainer = styled.div<{
+  noScroll?: boolean
+}>`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   width: 100vw;
-  height: 100%;
+  height: 100vh;
+  overflow-y: ${props => (props.noScroll ? 'hidden' : 'visible')};
   background: #f5f6fb;
+`
+
+export const FilterButton = styled.div`
+  position: fixed;
+  background: #122c53;
+  border-radius: 50%;
+  border: 3vw solid #122c53;
+  bottom: 5vh;
+  right: 10vw;
+  z-index: 10;
+`
+
+export const FilterIcon = styled(Search)`
+  width: 10vw;
+  color: #fff;
 `
 
 export const Title = styled.h1`

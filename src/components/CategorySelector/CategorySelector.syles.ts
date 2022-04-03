@@ -1,124 +1,142 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Tag } from '../../api/interfaces/Tag'
-import { TagCategory } from '../../api/interfaces/TagCategory'
+import { Close, Storage } from 'styled-icons/material'
 
 export const SelectorContainer = styled.div<{ isOpened: boolean }>`
   display: ${({ isOpened }) => (isOpened ? 'flex' : 'none')};
+  position: fixed;
   flex-direction: column;
   align-items: left;
+  z-index: 10;
 
-  width: 15rem;
-  height: 60vh;
-  max-height: 25rem;
+  width: 100vw;
+  height: calc(100vh - calc(100vh - 100%));
   gap: 1rem;
-  padding: 1rem 1rem 1rem;
-  border-radius: 0.5rem;
+  /* resize: vertical; */
 
-  background: #eeeeee;
+  background: #fff;
 `
 export const Header = styled.header`
   display: flex;
-  flex-direction: column;
-  justify-content: top;
-  align-items: left;
-  min-height: 3rem;
+  background: #e5e8ef;
+  width: 100%;
+  padding: 1rem 1rem;
+  gap: 2vw;
 `
 
-export const Title = styled.h3``
+export const CloseButton = styled(Close)`
+  width: 6vw;
+  color: #5c5b5b;
+`
 
-export const SubTitle = styled.h4<{ selectedCategory: TagCategory }>`
-  display: ${({ selectedCategory }) =>
-    selectedCategory.id ? 'block' : 'none'};
-  color: #313131;
-  font-size: 1rem;
+export const Title = styled.h3`
+  font: 400 5vw Roboto, sans-serif;
+  color: #0f2951;
 `
 
 type CategoryProps = {
-  selectedCategory: TagCategory
+  isEnable: boolean
 } & React.HTMLAttributes<HTMLUListElement>
 
-export const Categories = styled.ul<CategoryProps>`
-  display: ${props => (props.selectedCategory.id ? 'none' : 'flex')};
+export const Categories = styled.div`
+  display: flex;
   flex-direction: column;
   width: 100%;
-  padding-right: 0.8rem;
+  height: 100%;
 
-  gap: 0.8rem;
-  overflow-x: scroll;
+  padding: 6vw 6vw;
+  gap: 8vw;
+  overflow-y: scroll;
 
   list-style-type: none;
 `
 
-export const Category = styled.button`
+export const CategoryButton = styled.button`
   display: flex;
   align-items: center;
-  padding-left: 0.5rem;
-  height: 2.3rem;
-  width: 100%;
+  justify-content: center;
+  gap: 3vw;
+`
 
-  font: 400 1.4rem Roboto;
-  border: 1px solid #313131;
-  color: #313131;
-  background: #bdffdb;
-  border-radius: 0.4rem;
+export const CategoryIcon = styled(Storage)`
+  width: 6vw;
+  color: #909090;
+`
+
+export const CategoryLabel = styled.span`
+  font: 400 5vw Sora, sans-serif;
+  color: #4d4d4d;
+`
+
+export const TagsHeader = styled.div`
+  padding: 6vw 6vw 4vw;
 `
 
 type TagsProps = {
-  selectedCategory: TagCategory
+  isEnable: boolean
 } & React.HTMLAttributes<HTMLUListElement>
 
-export const Tags = styled.div<TagsProps>`
-  display: ${props => (props.selectedCategory.id ? 'flex' : 'none')};
+export const Tags = styled.div`
+  display: flex;
   flex-direction: column;
   width: 100%;
-  padding-right: 0.8rem;
+  height: 100%;
+  gap: 8vw;
+  padding: 0 14vw;
 
-  gap: 0.8rem;
-  overflow: scroll;
+  overflow-y: scroll;
+
+  list-style-type: none;
 `
 
 export const TagLabel = styled.label`
   display: flex;
   align-items: center;
-  height: 2.3rem;
-  max-height: 2.3rem;
-  max-width: 100%;
-  padding-right: 10%;
 
-  font: 400 1.4rem Roboto;
-  gap: 0.3rem;
-  color: #313131;
+  font: 400 5vw Sora, sans-serif;
+  gap: 2vw;
 
   white-space: nowrap;
 `
 
 export const TagCheckBox = styled.input`
-  min-height: 1.2rem;
-  min-width: 1.2rem;
+  height: 5vw;
+  width: 5vw;
+  outline: 0vw solid #000;
 `
 export const Footer = styled.footer`
   display: flex;
-  justify-content: right;
-  min-height: 2.4rem;
-  padding: 0 1rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
 `
 
-type DoneButtonProps = {
-  selectedTags: Tag[]
-}
+export const ApplyFilterButton = styled.button`
+  text-align: center;
+  width: 100%;
+  background: #112b52;
+  font: 500 4.5vw Sora, sans-serif;
+  color: #fff;
+  padding: 3vw 0;
+`
+export const ResetFilterButton = styled(ApplyFilterButton)`
+  background: #fff;
+  color: #112b52;
+`
 
-export const DoneButton = styled.button<DoneButtonProps>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: ${props => (props.selectedTags.length ? '#73E760' : '#DBDBDB')};
-  min-height: 100%;
-  width: 5rem;
-  color: ${props => (props.selectedTags.length ? '#313131' : '#B8B8B8')};
-  font: 400 1rem Roboto;
-  border-radius: 0.6rem;
-  border: 1px solid
-    ${props => (props.selectedTags.length ? '#313131' : '#B8B8B8')};
+export const TagSelectionDoneButton = styled.button`
+  padding: 3vw 0;
+  margin: 2vw;
+  width: 95%;
+
+  font: 500 4.5vw Sora, sans-serif;
+  background: #3252d0;
+  color: #fff;
+
+  border-radius: 5%;
+
+  :active {
+    background: #112b52;
+  }
 `

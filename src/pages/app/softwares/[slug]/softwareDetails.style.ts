@@ -24,6 +24,11 @@ export const Header = styled.div`
 export const Arrow = styled(ArrowBack)`
   margin-left: 5vw;
   height: 40%;
+  transition: all 0.3s;
+
+  :active {
+    color: #8695a0;
+  }
 `
 
 export const Main = styled.main`
@@ -55,7 +60,9 @@ export const Image = styled.img`
   margin: 0 auto;
 `
 
-export const BasicInformation = styled.div``
+export const BasicInformation = styled.div`
+  width: 100%;
+`
 
 export const Title = styled.h3`
   color: #5c5b5b;
@@ -89,6 +96,7 @@ export const SeeMore = styled.button`
   width: 100%;
   height: 6vw;
   background: #e5e8ef;
+  width: 100%;
 `
 type SeeMoreArrowProps = {
   opened: boolean

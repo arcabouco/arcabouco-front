@@ -18,19 +18,17 @@ import { useState } from 'react'
 
 import { HomeCards } from '../components/HomeCards/HomeCards'
 import { MenuButton } from '../components/MenuButton/MenuButton.styles'
+import { useSideNav } from '../components/SideNav/SideNav'
 
 const Home: NextPage = () => {
-  const [menuOpened, setMenuOpened] = useState(false)
-
-  const switchMenuHandler = () => {
-    setMenuOpened(!menuOpened)
-  }
+  const { SideNav, switchMenuOpened } = useSideNav()
 
   return (
     <HomeContainer>
+      <SideNav></SideNav>
       <MainContainer>
         <MenuBUttonContainer>
-          <MenuButton />
+          <MenuButton onClick={switchMenuOpened} />
         </MenuBUttonContainer>
 
         <ArcaboucoLogo />
