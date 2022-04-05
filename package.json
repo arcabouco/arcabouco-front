@@ -3,8 +3,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "echo $MY_ENV_VAR; next build",
+    "start": "echo $MY_ENV_VAR; next start",
     "lint": "next lint"
   },
   "dependencies": {
