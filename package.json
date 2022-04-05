@@ -2,9 +2,9 @@
   "name": "arcabouco-front",
   "private": true,
   "scripts": {
-    "dev": "ENV=dev next dev",
+    "dev": "next dev",
     "build": "next build",
-    "start": "ENV=prod next start",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {

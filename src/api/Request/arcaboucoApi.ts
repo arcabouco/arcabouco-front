@@ -17,7 +17,5 @@ arcaboucoApi.interceptors.request.use(config => {
       Authorization: `Bearer ${jwtToken}`
     }
 
-  console.log('interceptin', { jwtToken })
-
   return config
 })

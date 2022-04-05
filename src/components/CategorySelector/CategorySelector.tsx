@@ -82,8 +82,6 @@ export const CategorySelector = ({
     setCurrentCategory(null)
     setCurrentTags([])
     setSelectedCategories(newSelectedCategories)
-
-    console.log(newSelectedCategories)
   }
 
   const handleApplyFilter = () => {

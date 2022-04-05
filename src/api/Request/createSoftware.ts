@@ -16,7 +16,6 @@ export const createSoftware = async (
   formData.append('name', input.name)
   formData.append('description', input.description)
   formData.append('link', input.link)
-  console.log(input.images)
   input.images.forEach(imageBlob => formData.append('images', imageBlob))
 
   const { data } = await arcaboucoApi({

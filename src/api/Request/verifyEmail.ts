@@ -10,7 +10,5 @@ export const verifyEmail = async (
     url: `/user/email/${email}`
   })
 
-  console.log(data)
-
   return { isAvailable: data.isAvailable }
 }
