@@ -8,6 +8,9 @@ export const arcaboucoApi = axios.create({
 arcaboucoApi.interceptors.request.use(config => {
   const { 'arcabouco-token': jwtToken } = parseCookies()
 
+  console.log(process.env.ENV)
+  console.log(process.env)
+
   if (jwtToken)
     config.headers = {
       ...config.headers,
