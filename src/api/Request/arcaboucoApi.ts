@@ -9,7 +9,7 @@ arcaboucoApi.interceptors.request.use(config => {
   const { 'arcabouco-token': jwtToken } = parseCookies()
 
   console.log(process.env.ENV)
-  console.log(process.env)
+  console.log('test', process.env)
 
   if (jwtToken)
     config.headers = {
