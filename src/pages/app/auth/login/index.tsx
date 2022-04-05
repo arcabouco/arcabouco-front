@@ -13,23 +13,18 @@ import Link from 'next/link'
 import * as Yup from 'yup'
 import * as Request from '../../../../api/Request'
 import router, { useRouter } from 'next/router'
-import { useUser } from '../../../../Hook'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { TopBar } from '../../../../components/TopBar/TopBar'
+import { AuthContext } from '../../../../Context/Auth'
 
 const SignupPage = () => {
   const route = useRouter()
-  const { setJwtToken, user } = useUser()
+  const { setToken, user } = useContext(AuthContext)
 
   useEffect(() => {
     if (user) route.push('/')
   }, [user])
-
-  type FormSchema = {
-    email: string
-    password: string
-  }
 
   const formSchema = Yup.object({
     email: Yup.string().email('Email inválido').required('Obrigatório'),
@@ -38,41 +33,28 @@ const SignupPage = () => {
       .required('Obrigatório')
   })
 
+  type FormSchema = Yup.InferType<typeof formSchema>
+
   const handleSubmit = async (
     values: FormSchema,
     helper: FormikHelpers<FormSchema>
   ) => {
-    const response = await Request.login({
+    helper.setFieldValue('password', '')
+
+    const loginPromise = Request.login({
       email: values.email,
       password: values.password
-    }).catch(() => null)
+    })
 
-    if (response) {
-      setJwtToken(response.jwtToken)
-      helper.resetForm()
-      router.push((router.query.redirect as string) || '/')
-      toast.success(`${response.user.name}, login feito com sucesso`, {
-        position: 'top-left',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      })
-    } else {
-      toast.error('Usuário ou senha inválidos', {
-        position: 'top-left',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      })
-      helper.setFieldValue('password', '')
-      helper.setFieldError('password', 'Usuário ou senha inválidos')
-    }
+    const { jwtToken, user } = await toast.promise(loginPromise, {
+      error: 'Usuário ou senha incorretos',
+      pending: 'Verificando login e senha...',
+      success: 'Login efetuado com sucesso'
+    })
+
+    await setToken(jwtToken)
+
+    router.push((router.query.redirect as string) || '/')
   }
 
   return (

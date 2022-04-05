@@ -60,6 +60,15 @@ export const Image = styled.img`
   margin: 0 auto;
 `
 
+export const NextImageContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: contain;
+  width: 100%;
+  margin: 0 auto;
+`
+
 export const BasicInformation = styled.div`
   width: 100%;
 `

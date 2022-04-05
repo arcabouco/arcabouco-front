@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import Image from 'next/image'
 import { Search } from 'styled-icons/material'
 
 export const SoftwareListPageContainer = styled.div<{
@@ -75,6 +74,13 @@ export const IconContainer = styled.div`
 
   border-radius: 2vw;
   background: #e5e8ef;
+`
+
+export const Image = styled.img`
+  object-fit: contain;
+  width: max-content;
+  max-width: 100%;
+  max-height: 100%;
 `
 
 export const SoftwareInformation = styled.div`

@@ -1,4 +1,6 @@
+import { SoftwareImage } from './SoftwareImage'
 import { Tag } from './Tag'
+import { User } from './User'
 
 export type Software = {
   id: string
@@ -10,6 +12,10 @@ export type Software = {
   link: string
 
   tags: Tag[]
+
+  user: User
+
+  images: SoftwareImage[]
 
   createdAt: Date
 

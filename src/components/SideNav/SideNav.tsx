@@ -1,4 +1,10 @@
-import { ComponentType, MouseEvent, MouseEventHandler, useState } from 'react'
+import {
+  ComponentType,
+  MouseEvent,
+  MouseEventHandler,
+  useContext,
+  useState
+} from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import * as Material from 'styled-icons/material'
@@ -21,7 +27,7 @@ import {
   MenuItemLabel,
   LogoutInfo
 } from './SidNav.styles'
-import { useUser } from '../../Hook'
+import { AuthContext } from '../../Context/Auth'
 
 export const useSideNav = () => {
   const [menuOpened, setMenuOpened] = useState(false)
@@ -32,7 +38,7 @@ export const useSideNav = () => {
   }
 
   const SideNav = () => {
-    const { user, logout } = useUser()
+    const { user, logout } = useContext(AuthContext)
 
     return (
       <>
@@ -49,12 +55,14 @@ export const useSideNav = () => {
                 <ProfileContainer>
                   <UserImage></UserImage>
                   <UserInfo>
-                    <UserName>Jonathan</UserName>
-                    <UserEmail>jonarc06@gmail.com</UserEmail>
+                    <UserName>{user.name}</UserName>
+                    <UserEmail>{user.email}</UserEmail>
                   </UserInfo>
                 </ProfileContainer>
 
-                <GenericButton>Sugerir Software</GenericButton>
+                <Link href="/app/softwares/suggest">
+                  <GenericButton>Sugerir Software</GenericButton>
+                </Link>
                 <GenericButton>Sugerir Atividade</GenericButton>
               </>
             ) : (

@@ -149,7 +149,7 @@ const SignupPage = () => {
         )}
       </Formik>
 
-      <Link href={'app/auth/login'}>
+      <Link href={'/app/auth/login'}>
         <FootInfo>
           Já possui uma conta? <br /> <b>Faça Login!</b>
         </FootInfo>

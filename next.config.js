@@ -5,7 +5,11 @@ const nextConfig = {
   reactStrictMode: true,
   // pageExtensions: ['tsx'],
   images: {
-    domains: ['placeimg.com', 'www.aliger.com.br']
+    domains: [
+      'placeimg.com',
+      'www.aliger.com.br',
+      'arcabouco-dev.s3.us-east-1.amazonaws.com'
+    ]
   },
 
   async redirects() {

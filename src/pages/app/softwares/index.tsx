@@ -2,6 +2,7 @@ import {
   FilterButton,
   FilterIcon,
   IconContainer,
+  Image,
   List,
   SoftwareCard,
   SoftwareDescription,
@@ -10,28 +11,31 @@ import {
   SoftwareName,
   Title
 } from './softwares.style'
-import Image from 'next/image'
-import TestImage from '../../../../public/image.png'
+import EmptyImage from '../../../../public/empty-image.png'
 import { TopBar } from '../../../components/TopBar/TopBar'
 import Link from 'next/link'
 import { Popover } from 'react-tiny-popover'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { CategorySelector } from '../../../components/CategorySelector/CategorySelector'
 import * as Mock from '../../../api/Mock'
 import { Software } from '../../../api/interfaces/Software'
 import * as Request from '../../../api/Request'
+import NextImage from 'next/image'
+import { useRouter } from 'next/router'
+import * as Context from '../../../Context'
 
 const SoftwareListPage = () => {
+  const router = useRouter()
+  const { reload, softwares } = useContext(Context.Software.SoftwareContext)
+
   const [isFilterOpen, setIsFilterOpen] = useState(false)
 
   const [categories, setCategories] = useState(
     Mock.randomArrayOf(() => Mock.TagCategory(true), 10, 20)
   )
 
-  const [softwares, setSoftwares] = useState([] as Software[])
-
   useEffect(() => {
-    Request.listSoftwares().then(setSoftwares)
+    reload()
   }, [])
 
   return (
@@ -49,7 +53,7 @@ const SoftwareListPage = () => {
       <TopBar />
 
       <Title>
-        <b>{softwares.length}</b> softwares listados
+        <b>{softwares?.length}</b> softwares listados
       </Title>
 
       <List>
@@ -57,7 +61,15 @@ const SoftwareListPage = () => {
           <Link href={`/app/softwares/${software.id}`} key={software.id}>
             <SoftwareCard>
               <IconContainer>
-                <Image src={TestImage} />
+                {software?.images?.[0] ? (
+                  <Image
+                    src={software?.images?.[0]?.url}
+                    width={software?.images?.[0]?.width}
+                    height={software?.images?.[0]?.height}
+                  />
+                ) : (
+                  <NextImage src={EmptyImage} />
+                )}
               </IconContainer>
               <SoftwareInformation>
                 <SoftwareName>{software.name}</SoftwareName>
