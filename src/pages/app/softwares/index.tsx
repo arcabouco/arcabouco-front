@@ -14,23 +14,18 @@ import {
 import EmptyImage from '../../../../public/empty-image.png'
 import { TopBar } from '../../../components/TopBar/TopBar'
 import Link from 'next/link'
-import { Popover } from 'react-tiny-popover'
 import { useContext, useEffect, useState } from 'react'
 import { CategorySelector } from '../../../components/CategorySelector/CategorySelector'
 import * as Mock from '../../../api/Mock'
-import { Software } from '../../../api/interfaces/Software'
-import * as Request from '../../../api/Request'
 import NextImage from 'next/image'
-import { useRouter } from 'next/router'
 import * as Context from '../../../Context'
 
 const SoftwareListPage = () => {
-  const router = useRouter()
   const { reload, softwares } = useContext(Context.Software.SoftwareContext)
 
   const [isFilterOpen, setIsFilterOpen] = useState(false)
 
-  const [categories, setCategories] = useState(
+  const [categories] = useState(
     Mock.randomArrayOf(() => Mock.TagCategory(true), 10, 20)
   )
 

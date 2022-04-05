@@ -84,11 +84,11 @@ const SoftwarePage = () => {
 
           <CategoryList>
             {categories?.map(category => (
-              <Category>
+              <Category key={category.id}>
                 <CategoryLabel>{category.name}</CategoryLabel>
                 <TagContainer>
                   {category.tags.map(tag => (
-                    <Tag>{tag.name}</Tag>
+                    <Tag key={tag.id}>{tag.name}</Tag>
                   ))}
                 </TagContainer>
               </Category>

@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useEffect, useState } from 'react'
+import { HTMLAttributes, useState } from 'react'
 import { TagCategory } from '../../api/interfaces/TagCategory'
 import {
   ApplyFilterButton,
@@ -31,9 +31,9 @@ type CategorySelectorProps = {
 export const CategorySelector = ({
   categories,
   isOpened = true,
+  children,
   setIsOpened = () => {},
   onDone = () => {},
-  children,
   ...props
 }: CategorySelectorProps) => {
   const [currentTags, setCurrentTags] = useState([] as Tag[])
@@ -74,7 +74,9 @@ export const CategorySelector = ({
     newSelectedCategory.tags = currentTags
 
     const newSelectedCategories = selectedCategories
-      .filter(selectedCategory => selectedCategory.id != newSelectedCategory.id)
+      .filter(
+        selectedCategory => selectedCategory.id !== newSelectedCategory.id
+      )
       .concat(newSelectedCategory.tags.length ? newSelectedCategory : [])
 
     setCurrentCategory(null)

@@ -15,7 +15,7 @@ import {
 import * as Mock from '../../../../../api/Mock'
 
 export const EditSoftwarePage = () => {
-  const [categories, setCategories] = useState<null | TagCategory[]>(
+  const [categories] = useState<null | TagCategory[]>(
     Mock.randomArrayOf(Mock.TagCategory, 5, 10, true)
   )
 
@@ -25,11 +25,11 @@ export const EditSoftwarePage = () => {
 
       <CategoryList>
         {categories?.map(category => (
-          <Category>
+          <Category key={category.id}>
             <CategoryName>{category.name}</CategoryName>
             <TagContainer>
               {category.tags.map(tag => (
-                <Tag>{tag.name}</Tag>
+                <Tag key={tag.id}>{tag.name}</Tag>
               ))}
             </TagContainer>
           </Category>

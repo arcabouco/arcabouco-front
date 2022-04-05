@@ -1,5 +1,4 @@
-import { MouseEvent, UIEventHandler } from 'react'
-import { ChangeEvent, UIEvent, useState } from 'react'
+import { UIEventHandler, useState } from 'react'
 import {
   Button,
   Card,
@@ -8,11 +7,10 @@ import {
   RocketIcon,
   ScrollContainer,
   Container,
-  AtomIcon
+  AtomIcon,
+  FakeCard
 } from './HomeCards.styles'
-import { FakeCard } from './HomeCards.styles'
 
-import Atom from '../../assets/atom.svg'
 import Link from 'next/link'
 
 export const HomeCards = () => {

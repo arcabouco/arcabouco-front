@@ -46,7 +46,7 @@ const SignupPage = () => {
       password: values.password
     })
 
-    const { jwtToken, user } = await toast.promise(loginPromise, {
+    const { jwtToken } = await toast.promise(loginPromise, {
       error: 'Usuário ou senha incorretos',
       pending: 'Verificando login e senha...',
       success: 'Login efetuado com sucesso'

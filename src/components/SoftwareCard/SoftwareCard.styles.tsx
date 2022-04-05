@@ -1,15 +1,5 @@
-import { TagCategory } from '../../api/Mock'
 import { Card } from '../Card/Card'
-import {
-  Title,
-  StyledImage,
-  CardContainer,
-  ImageContainer
-} from './SoftwareCard'
-import Image from 'next/image'
-import faker from 'faker'
-
-const category = TagCategory(true)
+import { StyledImage, CardContainer, ImageContainer } from './SoftwareCard'
 
 export const SoftwareCard = () => (
   <Card>
