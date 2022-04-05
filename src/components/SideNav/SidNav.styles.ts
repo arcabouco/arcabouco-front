@@ -1,6 +1,5 @@
 import { ComponentType } from 'react'
-import styled, { css } from 'styled-components'
-import Arcabouco from '../assets/arcabouco-logo.svg'
+import styled from 'styled-components'
 import { Logout, Person } from 'styled-icons/material'
 
 export const Container = styled.div<{ opened: boolean }>`

@@ -2,14 +2,11 @@ import axios from 'axios'
 import { parseCookies } from 'nookies'
 
 export const arcaboucoApi = axios.create({
-  baseURL: 'https://api.arcabouco.org'
+  baseURL: 'http://localhost:3040'
 })
 
 arcaboucoApi.interceptors.request.use(config => {
   const { 'arcabouco-token': jwtToken } = parseCookies()
-
-  console.log(process.env.ENV)
-  console.log('test', process.env)
 
   if (jwtToken)
     config.headers = {

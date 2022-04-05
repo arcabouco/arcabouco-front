@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Check } from 'styled-icons/boxicons-regular'
-import Arcabouco from '../assets/arcabouco-logo.svg'
+import Arcabouco from '../../assets/arcabouco-logo.svg'
 
 export const HomeContainer = styled.div`
   display: flex;
@@ -22,7 +22,7 @@ export const MainContainer = styled.main`
   justify-content: flex-start;
   gap: min(3vw, 1.5vh);
   align-items: center;
-  padding: 1.5rem 1.5rem 3rem;
+  padding: 1.5rem 1.5rem 2rem;
 
   background-color: #2b4b65 !important;
   background: linear-gradient(
@@ -57,7 +57,7 @@ export const Title = styled.h1`
   display: flex;
   justify-content: flex-start;
   width: 100%;
-  font: 700 7vw Roboto, sans-serif;
+  font: 700 6vw Roboto, sans-serif;
 `
 
 export const Description = styled.p`
@@ -76,26 +76,34 @@ export const MoreInfo = styled.button`
   cursor: pointer;
 `
 
-export const InfoList = styled.ul`
+export const InfoList = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
 
   width: 100%;
-  gap: 1.2rem;
+  gap: 0.8rem;
   padding-top: 1rem;
 
   list-style-type: none;
 `
 
-export const InfoItem = styled.li`
-  font: 400 0.8rem Roboto, sans-serif;
+export const InfoItem = styled.div`
+  display: flex;
+`
+
+export const InfoItemLabel = styled.div`
+  font: 400 2vh Roboto, sans-serif;
 `
 
 export const CheckIcon = styled(Check)`
-  width: auto;
-  height: 1rem;
+  width: 2vh !important;
+  height: 2vh !important;
+
+  min-width: 2vh !important;
+  min-height: 2vh !important;
+
   margin-right: 0.3rem;
   background: #2fc863;
   border-radius: 50%;

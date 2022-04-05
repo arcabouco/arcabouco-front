@@ -65,9 +65,9 @@ export const HomeCards = () => {
           <Description>
             Navegue pela nossa lista de <b>atividades</b>.
           </Description>
-          <Link href={'/app/activities'}>
-            <Button scroll={1 - scroll}> Iniciar </Button>
-          </Link>
+          {/* <Link href={'/app/activities'}> */}
+          <Button scroll={1 - scroll}> Em breve </Button>
+          {/* </Link> */}
         </Card>
       </CardContainer>
     </Container>

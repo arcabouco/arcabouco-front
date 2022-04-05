@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import { Rocket } from 'styled-icons/ionicons-outline'
 import Atom from '../../assets/atom.svg'
+import { media } from '../../utils/css'
 
 export const Container = styled.div`
   display: flex;
@@ -13,6 +14,10 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
   max-height: 20rem;
+
+  ${media.desktop} {
+    max-height: 20vw;
+  }
 `
 
 export const ScrollContainer = styled.div`
@@ -82,16 +87,28 @@ export const Card = styled.div`
   margin: 0 3vw;
 
   transition: transform 0.1s;
-  /* right: 10rem; */
+
+  ${media.desktop} {
+    max-width: unset;
+    width: 22vh;
+    height: 30vh;
+
+    padding: 1vw 0.8vw;
+    margin: 0 2vw;
+  }
 `
 
 export const AtomIcon = styled(Atom)`
   width: auto;
   height: 15%;
 
-
   path {
     fill: #a9b6d2;
+  }
+
+  ${media.desktop} {
+    height: 35%;
+    width: 35%;
   }
 `
 
@@ -100,6 +117,11 @@ export const RocketIcon = styled(Rocket)`
   height: 15%;
   color: #a9b6d2;
   pointer-events: none;
+
+  ${media.desktop} {
+    height: 35%;
+    width: 35%;
+  }
 `
 
 export const Description = styled.span`
@@ -111,6 +133,10 @@ export const Description = styled.span`
 
   line-height: 130%;
   letter-spacing: 0.02em;
+
+  ${media.desktop} {
+    font: 400 2vh Roboto, sans-serif;
+  }
 `
 
 type ButtonProps = {

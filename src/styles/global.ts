@@ -20,4 +20,12 @@ export const GlobalStyle = createGlobalStyle`
     color: unset;
   }
 
+  @font-face {
+    font-family: Nazegul;
+    src: url("/fonts/Nazegul-Regular.ttf");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+  }
+
 `

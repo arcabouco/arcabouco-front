@@ -1,68 +1,25 @@
-import { NextPage } from 'next'
+import { useEffect, useState } from 'react'
+import { HomeDesktopPage } from '../responsiblePage/desktop/home.desktop'
+import { HomeMobilePage } from '../responsiblePage/mobile/home.mobile'
 
-import {
-  ArcaboucoLogo,
-  CardsContainer,
-  CheckIcon,
-  Description,
-  HomeContainer,
-  InfoItem,
-  InfoList,
-  MainContainer,
-  MenuBUttonContainer,
-  MoreInfo,
-  Title
-} from './home.styles'
+const Home = () => {
+  const [screenWidth, setScreenWidth] = useState(0)
 
-import { useState } from 'react'
+  useEffect(() => {
+    setScreenWidth(window.innerWidth)
 
-import { HomeCards } from '../components/HomeCards/HomeCards'
-import { MenuButton } from '../components/MenuButton/MenuButton.styles'
-import { useSideNav } from '../components/SideNav/SideNav'
+    window.addEventListener('resize', () => {
+      setScreenWidth(window.innerWidth)
+    })
 
-const Home: NextPage = () => {
-  const { SideNav, switchMenuOpened } = useSideNav()
+    return () => {
+      window.removeEventListener('resize', () => {
+        setScreenWidth(window.innerWidth)
+      })
+    }
+  }, [])
 
-  return (
-    <HomeContainer>
-      <SideNav></SideNav>
-      <MainContainer>
-        <MenuBUttonContainer>
-          <MenuButton onClick={switchMenuOpened} />
-        </MenuBUttonContainer>
-
-        <ArcaboucoLogo />
-
-        <Title>Seja bem-vindo</Title>
-
-        <Description>
-          Loren i consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua.
-        </Description>
-
-        <MoreInfo>Saiba mais &gt;</MoreInfo>
-
-        <InfoList>
-          <InfoItem>
-            <CheckIcon />
-            Mais de quinhentos softwares de educação
-          </InfoItem>
-
-          <InfoItem>
-            <CheckIcon /> +Três mil atividades com loren ipsum
-          </InfoItem>
-
-          <InfoItem>
-            <CheckIcon /> 100% gratuito
-          </InfoItem>
-        </InfoList>
-      </MainContainer>
-
-      <CardsContainer>
-        <HomeCards />
-      </CardsContainer>
-    </HomeContainer>
-  )
+  return <>{screenWidth > 1000 ? <HomeDesktopPage /> : <HomeMobilePage />}</>
 }
 
 export default Home

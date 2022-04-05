@@ -1,10 +1,4 @@
-import {
-  ComponentType,
-  MouseEvent,
-  MouseEventHandler,
-  useContext,
-  useState
-} from 'react'
+import { ComponentType, MouseEvent, useContext, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import * as Material from 'styled-icons/material'
