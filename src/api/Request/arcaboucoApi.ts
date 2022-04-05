@@ -4,7 +4,7 @@ import { parseCookies } from 'nookies'
 export const arcaboucoApi = axios.create({
   baseURL:
     process.env.NEXT_PUBLIC_ENV === 'prod'
-      ? 'https://api.arcabouco.com.br'
+      ? 'https://api.arcabouco.org'
       : 'http://localhost:3040'
 })
 
