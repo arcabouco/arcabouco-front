@@ -64,17 +64,16 @@ export const NavBar = (props: HTMLAttributes<HTMLDivElement>) => {
         <Button label="Sobre" page="/about"></Button>
 
         {user ? (
-          <>
-            <Popover
-              positions={['bottom', 'left']}
-              padding={15}
-              isOpen={profileOpened}
-              content={ProfileOptionPopover}
-              onClickOutside={() => setProfileOpened(false)}
-            >
-              <ProfilePhoto onClick={() => setProfileOpened(!profileOpened)} />
-            </Popover>
-          </>
+          <Popover
+            containerStyle={{ zIndex: '102' }}
+            positions={['bottom', 'left']}
+            padding={20}
+            isOpen={profileOpened}
+            content={<ProfileOptionPopover />}
+            onClickOutside={() => setProfileOpened(false)}
+          >
+            <ProfilePhoto onClick={() => setProfileOpened(!profileOpened)} />
+          </Popover>
         ) : (
           <AuthOptionsContainer>
             <Link href={'/app/auth/login'}>

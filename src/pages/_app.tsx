@@ -5,12 +5,12 @@ import { theme } from '../styles/theme'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { AuthProvider } from '../Context/Auth'
-import { SoftwareProvider } from '../Context/Software'
+import { ScreenProvider } from '../Context/Scheen'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <AuthProvider>
-      <SoftwareProvider>
+    <ScreenProvider>
+      <AuthProvider>
         <ThemeProvider theme={theme}>
           <meta
             name="viewport"
@@ -21,8 +21,8 @@ function MyApp({ Component, pageProps }: AppProps) {
           <GlobalStyle />
         </ThemeProvider>
         <ToastContainer />
-      </SoftwareProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </ScreenProvider>
   )
 }
 

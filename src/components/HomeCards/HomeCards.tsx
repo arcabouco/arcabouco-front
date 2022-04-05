@@ -41,6 +41,7 @@ export const HomeCards = () => {
 
       <CardContainer>
         <Card
+          scroll={1 - scroll}
           onClick={handleCardClick(0)}
           style={{
             transform: `scale(${(1 - scroll) * 0.2 + 1}) translateY(-3%)`
@@ -56,6 +57,7 @@ export const HomeCards = () => {
         </Card>
 
         <Card
+          scroll={scroll}
           onClick={handleCardClick(1)}
           style={{
             transform: `scale(${scroll * 0.2 + 1}) translateY(-3%)`

@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { Github, Instagram } from 'styled-icons/bootstrap'
 import { Figma } from 'styled-icons/boxicons-logos'
 import { Drive } from 'styled-icons/entypo'
+import { media } from '../../utils/css'
 
 export const FooterContainer = styled.div`
   background: linear-gradient(
@@ -17,7 +18,7 @@ export const FooterContainer = styled.div`
   );
   background-color: #2b4b65 !important;
 
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -25,6 +26,10 @@ export const FooterContainer = styled.div`
   width: 100%;
   padding: 12vw 25vw 8vw;
   gap: 5rem;
+
+  ${media.desktop} {
+    display: flex;
+  }
 `
 
 export const MainInfo = styled.div`

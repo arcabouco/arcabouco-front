@@ -9,7 +9,7 @@ import {
   MoreInfo,
   Text,
   Title
-} from './Footer.styles'
+} from './DefaultFooter.styles'
 
 export const DefaultFooter = () => (
   <FooterContainer>

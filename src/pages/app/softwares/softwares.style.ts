@@ -1,17 +1,64 @@
 import styled from 'styled-components'
 import { Search } from 'styled-icons/material'
+import { media } from '../../../utils/css'
 
-export const SoftwareListPageContainer = styled.div<{
+type SoftwareListPageProps = {
   noScroll?: boolean
-}>`
+}
+
+export const SoftwareListPageContainer = styled.div<SoftwareListPageProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
   overflow-y: ${props => (props.noScroll ? 'hidden' : 'visible')};
   background: #f5f6fb;
+`
+export const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+
+  ${media.desktop} {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2vw;
+  }
+`
+
+export const FilterContainer = styled.div`
+  /* display: none; */
+  /* flex-direction: column; */
+
+  ${media.desktop} {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    width: 25vw;
+    height: 85vh;
+  }
+`
+
+export const ListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  ${media.desktop} {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5vh;
+  }
+`
+
+export const FilterTitle = styled.h2`
+  display: none;
+
+  ${media.desktop} {
+    display: block;
+    font: 500 1vw Roboto, sans-serif;
+    text-align: left;
+    width: 100%;
+    margin: 3vw 1vw 0;
+  }
 `
 
 export const FilterButton = styled.div`
@@ -22,6 +69,10 @@ export const FilterButton = styled.div`
   bottom: 5vh;
   right: 10vw;
   z-index: 10;
+
+  ${media.desktop} {
+    display: none;
+  }
 `
 
 export const FilterIcon = styled(Search)`
@@ -29,12 +80,50 @@ export const FilterIcon = styled(Search)`
   color: #fff;
 `
 
+export const FilterButtonDesk = styled.button`
+  display: none;
+  ${media.desktop} {
+    display: block;
+    /* border: 1px dashed #000; */
+    margin: 1vw 1vw 0;
+    width: 6vw;
+    font: 500 0.8vw Roboto, sans-serif;
+    color: #5c5b5b;
+    /* padding: 1vw */
+    padding: 0.5vw;
+
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='4' ry='4' stroke='black' stroke-width='3' stroke-dasharray='8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+    border-radius: 5px;
+
+    cursor: pointer;
+  }
+`
+
 export const Title = styled.h1`
   color: #000;
-  font: 400 min(5vw, 2rem) Roboto, sans-serif;
-  margin: min(2rem, 5vh) auto 2vh 5vw;
-  b {
-    font-weight: 500;
+  font: 500 6vw Roboto, sans-serif;
+  margin: 3vw auto 1vw 5vw;
+
+  ${media.desktop} {
+    font: 500 1.6vw Roboto, sans-serif;
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    margin-bottom: 2vh;
+  }
+`
+
+export const SubTitle = styled.h1`
+  color: #000;
+  font: 400 4vw Roboto, sans-serif;
+  margin: 3vw auto 2vw 5vw;
+
+  ${media.desktop} {
+    font: 400 1vw Roboto, sans-serif;
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    margin-bottom: 2vh;
   }
 `
 
@@ -63,6 +152,14 @@ export const SoftwareCard = styled.div`
 
   background: #fff;
   filter: drop-shadow(0px 2.58px 5.16px rgba(16, 24, 64, 0.08));
+
+  cursor: pointer;
+
+  ${media.desktop} {
+    width: 40vw;
+    height: 13vw;
+    padding: 1vw 1vw;
+  }
 `
 
 export const IconContainer = styled.div`
@@ -74,6 +171,10 @@ export const IconContainer = styled.div`
 
   border-radius: 2vw;
   background: #e5e8ef;
+
+  ${media.desktop} {
+    border-radius: 0.8vw;
+  }
 `
 
 export const Image = styled.img`
@@ -93,11 +194,19 @@ export const SoftwareInformation = styled.div`
   max-height: 100%;
   height: 100%;
   width: 100%;
+
+  ${media.desktop} {
+    gap: 1vw;
+  }
 `
 
 export const SoftwareName = styled.h3`
   color: #5c5b5b;
   font: 600 5vw Roboto, sans-serif;
+
+  ${media.desktop} {
+    font: 600 1vw Roboto, sans-serif;
+  }
 `
 
 export const SoftwareDescription = styled.div`
@@ -114,4 +223,9 @@ export const SoftwareDescription = styled.div`
   overflow: hidden;
 
   text-overflow: ellipsis;
+
+  ${media.desktop} {
+    font: 400 1.03vw Roboto, sans-serif;
+    -webkit-line-clamp: 7;
+  }
 `

@@ -70,7 +70,11 @@ export const CardContainer = styled.div`
   width: 100%;
 `
 
-export const Card = styled.div`
+type CardProps = {
+  scroll: number
+} & HTMLAttributes<HTMLDivElement>
+
+export const Card = styled.div<CardProps>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -87,6 +91,8 @@ export const Card = styled.div`
   margin: 0 3vw;
 
   transition: transform 0.1s;
+
+  cursor: ${props => (Math.round(props.scroll) ? 'default' : 'pointer')};
 
   ${media.desktop} {
     max-width: unset;

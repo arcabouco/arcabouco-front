@@ -1,5 +1,13 @@
 import styled from 'styled-components'
 import Arcabouco from '../../assets/arcabouco-logo.svg'
+import { media } from '../../utils/css'
+
+export const TopBarContainer = styled.div`
+  width: 100%;
+  ${media.desktop} {
+    display: none;
+  }
+`
 
 export const Header = styled.div`
   display: flex;

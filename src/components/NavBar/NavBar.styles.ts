@@ -1,14 +1,20 @@
 import { HTMLProps } from 'react'
 import styled from 'styled-components'
 import { Logout, Person } from 'styled-icons/material'
+import { media } from '../../utils/css'
 
 export const NavBarContainer = styled.div`
-  display: flex;
+  display: none;
   justify-content: space-around;
   align-items: center;
   background: #0d264f;
   height: 15vh;
   width: 100%;
+  z-index: 100;
+
+  ${media.desktop} {
+    display: flex;
+  }
 `
 
 export const Title = styled.span`

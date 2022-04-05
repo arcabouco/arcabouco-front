@@ -25,16 +25,12 @@ type CategorySelectorProps = {
   onDone?: (categories: TagCategory[]) => void
   setIsOpened?: (isOpened: boolean) => void
   isOpened?: boolean
-  children: JSX.Element
 } & HTMLAttributes<HTMLDivElement>
 
 export const CategorySelector = ({
   categories,
-  isOpened = true,
-  children,
   setIsOpened = () => {},
-  onDone = () => {},
-  ...props
+  onDone = () => {}
 }: CategorySelectorProps) => {
   const [currentTags, setCurrentTags] = useState([] as Tag[])
   const [currentCategory, setCurrentCategory] = useState<TagCategory | null>(
@@ -96,60 +92,57 @@ export const CategorySelector = ({
   }
 
   return (
-    <>
-      {children}
-      <SelectorContainer isOpened={isOpened} {...props}>
-        <Header>
-          <CloseButton onClick={() => setIsOpened(!isOpened)} />
-          <Title> Filtros </Title>
-        </Header>
+    <SelectorContainer>
+      <Header>
+        <CloseButton onClick={() => setIsOpened(false)} />
+        <Title> Filtros </Title>
+      </Header>
 
-        {currentCategory ? (
-          <>
-            <TagsHeader>
-              <CategoryItem category={currentCategory}></CategoryItem>
-            </TagsHeader>
-            <Tags>
-              {currentCategory.tags.map(tag => (
-                <TagItem
-                  tag={tag}
-                  selectedTags={currentTags}
-                  onClick={handleTagClick(tag)}
-                  key={tag.id}
-                />
-              ))}
-            </Tags>
-          </>
-        ) : (
-          <Categories>
-            {categories.map(category => (
-              <CategoryItem
-                key={category.id}
-                onClick={handleCategoryClick(category)}
-                category={category}
+      {currentCategory ? (
+        <>
+          <TagsHeader>
+            <CategoryItem category={currentCategory}></CategoryItem>
+          </TagsHeader>
+          <Tags>
+            {currentCategory.tags.map(tag => (
+              <TagItem
+                tag={tag}
+                selectedTags={currentTags}
+                onClick={handleTagClick(tag)}
+                key={tag.id}
               />
             ))}
-          </Categories>
-        )}
+          </Tags>
+        </>
+      ) : (
+        <Categories>
+          {categories.map(category => (
+            <CategoryItem
+              key={category.id}
+              onClick={handleCategoryClick(category)}
+              category={category}
+            />
+          ))}
+        </Categories>
+      )}
 
-        <Footer>
-          {currentCategory ? (
-            <TagSelectionDoneButton onClick={handleTagSelectionDone}>
-              Concluir
-            </TagSelectionDoneButton>
-          ) : (
-            <>
-              <ApplyFilterButton onClick={handleApplyFilter}>
-                APLICAR FILTRO
-              </ApplyFilterButton>
-              <ResetFilterButton onClick={handleResetFilter}>
-                LIMPAR FILTROS
-              </ResetFilterButton>
-            </>
-          )}
-        </Footer>
-      </SelectorContainer>
-    </>
+      <Footer>
+        {currentCategory ? (
+          <TagSelectionDoneButton onClick={handleTagSelectionDone}>
+            Concluir
+          </TagSelectionDoneButton>
+        ) : (
+          <>
+            <ApplyFilterButton onClick={handleApplyFilter}>
+              APLICAR FILTRO
+            </ApplyFilterButton>
+            <ResetFilterButton onClick={handleResetFilter}>
+              LIMPAR FILTROS
+            </ResetFilterButton>
+          </>
+        )}
+      </Footer>
+    </SelectorContainer>
   )
 }
 

@@ -1,4 +1,4 @@
-import { DefaultFooter } from '../../components/DefaultFooter/Footer'
+import { DefaultFooter } from '../../components/DefaultFooter/DefaultFooter'
 import { HomeCards } from '../../components/HomeCards/HomeCards'
 import { NavBar } from '../../components/NavBar/NavBar'
 import {
@@ -58,7 +58,8 @@ export const HomeDesktopPage = () => {
             sugestões de novos softwares e atividades no catálogo
           </Description>
           <Description>
-            Arcabou é e sempre será gratuito, sem fins lucrativos e opensource
+            O Arcabouço é e sempre será gratuito, sem fins lucrativos e
+            opensource
           </Description>
         </DescriptionContainer>
       </MoreInfoContainer>
