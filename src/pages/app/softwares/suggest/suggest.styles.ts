@@ -216,7 +216,8 @@ export const InputLabel = styled.label`
 
   ${media.desktop} {
     font-size: 140%;
-    gap: 0.8rem;
+    gap: 0.5rem;
+    margin-bottom: 1.4rem;
   }
 `
 
@@ -229,7 +230,7 @@ export const Warring = styled.span`
   height: 8vw;
 
   ${media.desktop} {
-    font-size: 100%;
+    font-size: 60%;
     height: unset;
   }
 `
