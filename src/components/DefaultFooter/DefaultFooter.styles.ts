@@ -22,9 +22,9 @@ export const FooterContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 20vh;
   width: 100%;
-  padding: 12vw 25vw 8vw;
+
+  padding: 4vw 25vw;
   gap: 5rem;
 
   ${media.desktop} {
@@ -75,6 +75,7 @@ export const DriveIcon = styled(Drive)`
 export const Title = styled.span`
   font: 400 1.4vw Nazegul, sans-serif;
   color: white;
+  cursor: pointer;
 `
 
 export const MoreInfo = styled.div`

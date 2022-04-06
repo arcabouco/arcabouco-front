@@ -11,10 +11,14 @@ import {
   Title
 } from './DefaultFooter.styles'
 
+import Link from 'next/link'
+
 export const DefaultFooter = () => (
   <FooterContainer>
     <MainInfo>
-      <Title>ARCABOUCO</Title>
+      <Link href={'/'}>
+        <Title>ARCABOUCO</Title>
+      </Link>
 
       <ContactInfo>
         <Text>Páginas oficiais</Text>

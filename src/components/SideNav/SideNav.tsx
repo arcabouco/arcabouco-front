@@ -22,6 +22,8 @@ import {
   LogoutInfo
 } from './SidNav.styles'
 import { AuthContext } from '../../Context/Auth'
+import { toast } from 'react-toastify'
+import * as Bootstrap from 'styled-icons/bootstrap'
 
 export const useSideNav = () => {
   const [menuOpened, setMenuOpened] = useState(false)
@@ -76,7 +78,13 @@ export const useSideNav = () => {
 
           <Menu>
             <LinkButton icon={Material.Home} page={'/'} label={'Home'} />
-            <LinkButton icon={Material.Info} page={'/about'} label={'Sobre'} />
+            <LinkButton
+              icon={Material.Devices}
+              page={'/app/softwares'}
+              label={'Softwares'}
+            />
+            <LinkButton icon={Material.Extension} label={'Atividades'} />
+            <LinkButton icon={Material.Info} label={'Sobre'} />
           </Menu>
         </Bar>
       </>
@@ -87,7 +95,7 @@ export const useSideNav = () => {
 }
 
 type LintButtonProps = {
-  page: string
+  page?: string
   label: string
   icon: ComponentType<any>
 }
@@ -99,12 +107,17 @@ const LinkButton = ({ label, page, icon }: LintButtonProps) => {
 
   const MenuItemIcon = MenuItemIconStyle(icon)
 
-  return (
+  return page ? (
     <Link href={page}>
       <MenuItemContainer>
         <MenuItemIcon selected={selected} />
         <MenuItemLabel selected={selected}>{label}</MenuItemLabel>
       </MenuItemContainer>
     </Link>
+  ) : (
+    <MenuItemContainer onClick={() => toast.warn('Em breve')}>
+      <MenuItemIcon selected={selected} />
+      <MenuItemLabel selected={selected}>{label}</MenuItemLabel>
+    </MenuItemContainer>
   )
 }

@@ -20,6 +20,7 @@ export const NavBarContainer = styled.div`
 export const Title = styled.span`
   font: 400 1.4vw Nazegul, sans-serif;
   color: white;
+  cursor: pointer;
 `
 
 export const MenuContainer = styled.div`

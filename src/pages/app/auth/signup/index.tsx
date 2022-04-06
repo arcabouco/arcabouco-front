@@ -6,7 +6,8 @@ import {
   SignupPageContainer,
   SignupButton,
   Title,
-  Warring
+  Warring,
+  FormContainer
 } from './signup.styles'
 import { Formik, FormikHelpers } from 'formik'
 import Link from 'next/link'
@@ -14,6 +15,7 @@ import * as Yup from 'yup'
 import * as Request from '../../../../api/Request'
 import { useRouter } from 'next/router'
 import { TopBar } from '../../../../components/TopBar/TopBar'
+import { DefaultFooter } from '../../../../components/DefaultFooter/DefaultFooter'
 
 const SignupPage = () => {
   const route = useRouter()
@@ -57,103 +59,107 @@ const SignupPage = () => {
   return (
     <SignupPageContainer>
       <TopBar />
-      <Title>Cadastro</Title>
+      <FormContainer>
+        <Title>Cadastro</Title>
 
-      <Formik
-        initialValues={
-          {
-            name: '',
-            lastName: '',
-            email: '',
-            password: '',
-            rePassword: ''
-          } as FormSchema
-        }
-        onSubmit={handleSubmit}
-        validationSchema={formSchema}
-        validate={async values => {
-          const { isAvailable } = await Request.verifyEmail(values.email)
-          return isAvailable ? {} : { email: 'Email já cadastrado' }
-        }}
-      >
-        {({ values, handleChange, handleSubmit, errors, touched }) => (
-          <Form onSubmit={handleSubmit}>
-            <Label>
-              Nome
-              <Input
-                type={'name'}
-                name={'name'}
-                placeholder={'Digite aqui'}
-                onChange={handleChange}
-                value={values.name}
-              />
-            </Label>
-            <Warring>{errors.name && touched.name && errors.name}</Warring>
+        <Formik
+          initialValues={
+            {
+              name: '',
+              lastName: '',
+              email: '',
+              password: '',
+              rePassword: ''
+            } as FormSchema
+          }
+          onSubmit={handleSubmit}
+          validationSchema={formSchema}
+          validate={async values => {
+            const { isAvailable } = await Request.verifyEmail(values.email)
+            return isAvailable ? {} : { email: 'Email já cadastrado' }
+          }}
+        >
+          {({ values, handleChange, handleSubmit, errors, touched }) => (
+            <Form onSubmit={handleSubmit}>
+              <Label>
+                Nome
+                <Input
+                  type={'name'}
+                  name={'name'}
+                  placeholder={'Digite aqui'}
+                  onChange={handleChange}
+                  value={values.name}
+                />
+              </Label>
+              <Warring>{errors.name && touched.name && errors.name}</Warring>
 
-            <Label>
-              Sobrenome
-              <Input
-                type={'lastName'}
-                name={'lastName'}
-                placeholder={'Digite aqui'}
-                onChange={handleChange}
-                value={values.lastName}
-              />
-            </Label>
-            <Warring>
-              {errors.lastName && touched.lastName && errors.lastName}
-            </Warring>
+              <Label>
+                Sobrenome
+                <Input
+                  type={'lastName'}
+                  name={'lastName'}
+                  placeholder={'Digite aqui'}
+                  onChange={handleChange}
+                  value={values.lastName}
+                />
+              </Label>
+              <Warring>
+                {errors.lastName && touched.lastName && errors.lastName}
+              </Warring>
 
-            <Label>
-              E-mail
-              <Input
-                type={'email'}
-                name={'email'}
-                placeholder={'Digite aqui'}
-                onChange={handleChange}
-                value={values.email}
-              />
-            </Label>
-            <Warring>{errors.email && touched.email && errors.email}</Warring>
+              <Label>
+                E-mail
+                <Input
+                  type={'email'}
+                  name={'email'}
+                  placeholder={'Digite aqui'}
+                  onChange={handleChange}
+                  value={values.email}
+                />
+              </Label>
+              <Warring>{errors.email && touched.email && errors.email}</Warring>
 
-            <Label>
-              Senha
-              <Input
-                type={'password'}
-                name={'password'}
-                placeholder={'Digite aqui'}
-                onChange={handleChange}
-                value={values.password}
-              />
-            </Label>
-            <Warring>
-              {errors.password && touched.password && errors.password}
-            </Warring>
+              <Label>
+                Senha
+                <Input
+                  type={'password'}
+                  name={'password'}
+                  placeholder={'Digite aqui'}
+                  onChange={handleChange}
+                  value={values.password}
+                />
+              </Label>
+              <Warring>
+                {errors.password && touched.password && errors.password}
+              </Warring>
 
-            <Label>
-              Confirmar senha
-              <Input
-                type={'password'}
-                name={'rePassword'}
-                placeholder={'Digite aqui'}
-                onChange={handleChange}
-                value={values.rePassword}
-              />
-            </Label>
-            <Warring>
-              {errors.rePassword && touched.rePassword && errors.rePassword}
-            </Warring>
+              <Label>
+                Confirmar senha
+                <Input
+                  type={'password'}
+                  name={'rePassword'}
+                  placeholder={'Digite aqui'}
+                  onChange={handleChange}
+                  value={values.rePassword}
+                />
+              </Label>
+              <Warring>
+                {errors.rePassword && touched.rePassword && errors.rePassword}
+              </Warring>
 
-            <SignupButton type="submit">Cadastrar</SignupButton>
-          </Form>
-        )}
-      </Formik>
+              <SignupButton type="submit">Cadastrar</SignupButton>
+            </Form>
+          )}
+        </Formik>
 
-      <Link href={'/app/auth/login'}>
-        <FootInfo>
-          Já possui uma conta? <br /> <b>Faça Login!</b>
-        </FootInfo>
-      </Link>
+        <Link href={'/app/auth/login'}>
+          <FootInfo>
+            Já possui uma conta? <br /> <b>Faça Login!</b>
+          </FootInfo>
+        </Link>
+      </FormContainer>
+
+      <DefaultFooter />
     </SignupPageContainer>
   )
 }

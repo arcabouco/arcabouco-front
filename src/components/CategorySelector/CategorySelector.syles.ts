@@ -83,6 +83,7 @@ export const CategoryButton = styled.button`
   align-items: center;
   justify-content: center;
   gap: 3vw;
+  cursor: pointer;
 
   ${media.desktop} {
     gap: 1vw;
@@ -92,6 +93,7 @@ export const CategoryButton = styled.button`
 export const CategoryIcon = styled(Storage)`
   width: 6vw;
   color: #909090;
+  cursor: pointer;
 
   ${media.desktop} {
     width: 2vw;
@@ -101,6 +103,7 @@ export const CategoryIcon = styled(Storage)`
 export const CategoryLabel = styled.span`
   font: 400 5vw Sora, sans-serif;
   color: #4d4d4d;
+  cursor: pointer;
 
   ${media.desktop} {
     font: 400 1vw Sora, sans-serif;
@@ -109,11 +112,10 @@ export const CategoryLabel = styled.span`
 
 export const TagsHeader = styled.div`
   padding: 6vw 6vw 4vw;
+  ${media.desktop} {
+    padding: 0vw 1vw 0vw;
+  }
 `
-
-type TagsProps = {
-  isEnable: boolean
-} & React.HTMLAttributes<HTMLUListElement>
 
 export const Tags = styled.div`
   display: flex;
@@ -122,8 +124,14 @@ export const Tags = styled.div`
   height: 100%;
   gap: 8vw;
   padding: 0 14vw;
+  overflow-y: scroll;
 
   list-style-type: none;
+
+  ${media.desktop} {
+    gap: 1vw;
+    padding: 0vw 2vw;
+  }
 `
 
 export const TagLabel = styled.label`
@@ -133,13 +141,27 @@ export const TagLabel = styled.label`
   font: 400 5vw Sora, sans-serif;
   gap: 2vw;
 
+  width: min-content;
+
   white-space: nowrap;
+  cursor: pointer;
+
+  ${media.desktop} {
+    font: 400 1vw Sora, sans-serif;
+    gap: 0.5vw;
+  }
 `
 
 export const TagCheckBox = styled.input`
   height: 5vw;
   width: 5vw;
   outline: 0vw solid #000;
+  cursor: pointer;
+
+  ${media.desktop} {
+    height: 1vw;
+    width: 1vw;
+  }
 `
 export const Footer = styled.footer`
   display: flex;
@@ -156,6 +178,7 @@ export const ApplyFilterButton = styled.button`
   font: 500 4.5vw Sora, sans-serif;
   color: #fff;
   padding: 3vw 0;
+  cursor: pointer;
 
   ${media.desktop} {
     font: 500 0.8vw Sora, sans-serif;
@@ -179,14 +202,15 @@ export const TagSelectionDoneButton = styled.button`
   font: 500 4.5vw Sora, sans-serif;
   background: #3252d0;
   color: #fff;
-
   border-radius: 5%;
+  cursor: pointer;
 
   :active {
     background: #112b52;
   }
 
   ${media.desktop} {
-    font: 500 2vw Sora, sans-serif;
+    font: 500 1vw Sora, sans-serif;
+    padding: 1vw 0;
   }
 `

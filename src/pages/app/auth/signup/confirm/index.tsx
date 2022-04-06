@@ -9,6 +9,8 @@ import {
 } from './confirm.styles'
 import * as Request from '../../../../../api/Request'
 import { HashLoader } from 'react-spinners'
+import { DefaultFooter } from '../../../../../components/DefaultFooter/DefaultFooter'
+import { toast } from 'react-toastify'
 
 const SignupConfirmPage = () => {
   const router = useRouter()
@@ -19,12 +21,14 @@ const SignupConfirmPage = () => {
     if (!router.query.id) return
     if (!router.query.token) return
 
-    Request.confirmSignup({
+    const confirmation = Request.confirmSignup({
       token: router.query.token as string,
       userId: router.query.id as string
+    }).then(() => setIsConfirmed(true))
+
+    toast.promise(confirmation, {
+      error: 'Erro ao confirmar o cadastro'
     })
-      .then(() => setIsConfirmed(true))
-      .catch(console.error)
   }, [router.query.id, router.query.token])
 
   useEffect(() => {
@@ -56,6 +60,8 @@ const SignupConfirmPage = () => {
           <HashLoader color="#484aad" />
         )}
       </Main>
+
+      <DefaultFooter />
     </SignupConfirmPageContainer>
   )
 }

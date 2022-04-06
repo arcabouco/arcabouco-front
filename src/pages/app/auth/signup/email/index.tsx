@@ -1,3 +1,4 @@
+import { DefaultFooter } from '../../../../../components/DefaultFooter/DefaultFooter'
 import {
   EmailIcon,
   EmailInfo,
@@ -16,6 +17,8 @@ const SignupEmailPage = () => (
         sua caixa de entrada e caixa de span.
       </EmailInfo>
     </Main>
+
+    <DefaultFooter />
   </SignupEmailPageContainer>
 )
 

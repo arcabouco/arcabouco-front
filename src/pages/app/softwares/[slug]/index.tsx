@@ -1,9 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Software } from '../../../../api/interfaces/Software'
-import EmptyImage from '../../../../../public/empty-image.png'
-import NextImage from 'next/image'
 import { TagCategory } from '../../../../api/interfaces/TagCategory'
 import {
   Arrow,
@@ -16,10 +14,10 @@ import {
   Description,
   Header,
   Image,
+  InfoContainer,
   Main,
-  NextImageContainer,
   SeeMore,
-  SeeMoreArrow,
+  SoftwareContainer,
   SoftwarePageContainer,
   Tag,
   TagContainer,
@@ -28,10 +26,13 @@ import {
 } from './softwareDetails.style'
 
 import * as Request from '../../../../api/Request'
+import { NavBar } from '../../../../components/NavBar/NavBar'
+import { ScreenContext } from '../../../../Context/Scheen'
 
 const SoftwarePage = () => {
   const router = useRouter()
-  const [seeMoreOpened, setSeeMoreOpened] = useState(true)
+  const { isMobile } = useContext(ScreenContext)
+  const [seeMoreOpened, setSeeMoreOpened] = useState(false)
 
   const handleSeeMore = () => setSeeMoreOpened(!seeMoreOpened)
 
@@ -51,42 +52,36 @@ const SoftwarePage = () => {
 
   return (
     <SoftwarePageContainer>
+      <NavBar />
       <Header>
         <Arrow onClick={router.back} />
       </Header>
 
       <Main>
-        {software?.images?.[0] ? (
-          <Image src={software?.images?.[0]?.url} />
-        ) : (
-          <NextImageContainer style={{ width: '100%', display: 'flex' }}>
-            <NextImage src={EmptyImage} width={200} height={200} />
-          </NextImageContainer>
-        )}
-
-        <BasicInformation>
-          <Title>{software?.name} </Title>
-          <Description opened={seeMoreOpened}>
-            {software?.description}
-          </Description>
-          <SeeMore onClick={handleSeeMore}>
-            <SeeMoreArrow opened={seeMoreOpened} />
-            Ler toda descrição
-          </SeeMore>
-        </BasicInformation>
-
-        <Link href={software?.link || ''}>
-          <UseButton>USAR ESSE SOFTWARE</UseButton>
-        </Link>
+        <SoftwareContainer>
+          <InfoContainer>
+            <Image src={software?.images?.[0]?.url || '/empty-image.png'} />
+            <BasicInformation>
+              <Title>{software?.name} </Title>
+              <Description opened={seeMoreOpened}>
+                {software?.description}
+              </Description>
+              <SeeMore onClick={handleSeeMore}>Ler mais</SeeMore>
+            </BasicInformation>
+          </InfoContainer>
+          <Link href={software?.link || ''}>
+            <UseButton>USAR ESSE SOFTWARE</UseButton>
+          </Link>
+        </SoftwareContainer>
 
         <CategoryContainer>
-          <CategoriesLabel>Categorias</CategoriesLabel>
+          <CategoriesLabel>Marcadores</CategoriesLabel>
 
           <CategoryList>
             {categories?.map(category => (
               <Category key={category.id}>
                 <CategoryLabel>{category.name}</CategoryLabel>
-                <TagContainer>
+                <TagContainer hideScrollbars={isMobile}>
                   {category.tags.map(tag => (
                     <Tag key={tag.id}>{tag.name}</Tag>
                   ))}

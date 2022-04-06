@@ -14,7 +14,8 @@ arcaboucoApi.interceptors.request.use(config => {
   if (jwtToken)
     config.headers = {
       ...config.headers,
-      Authorization: `Bearer ${jwtToken}`
+      Authorization: `Bearer ${jwtToken}`,
+      'Content-Type': 'application/json'
     }
 
   return config

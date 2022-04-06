@@ -17,9 +17,10 @@ import {
 import { useRouter } from 'next/dist/client/router'
 import * as Context from '../../Context'
 import { Popover } from 'react-tiny-popover'
+import { toast } from 'react-toastify'
 
 type NavBarLinkProps = {
-  page: string
+  page?: string
   label: string
 }
 
@@ -32,11 +33,19 @@ export const NavBar = (props: HTMLAttributes<HTMLDivElement>) => {
 
   useEffect(() => setSelectedPage(router.pathname), [router.pathname])
 
-  const Button = ({ page, label }: NavBarLinkProps) => (
-    <Link href={page}>
-      <MenuButton selected={selectedPage === page}>{label}</MenuButton>
-    </Link>
-  )
+  const Button = ({ page, label }: NavBarLinkProps) =>
+    page ? (
+      <Link href={page}>
+        <MenuButton selected={selectedPage === page}>{label}</MenuButton>
+      </Link>
+    ) : (
+      <MenuButton
+        selected={selectedPage === page}
+        onClick={() => toast.warn('Em breve')}
+      >
+        {label}
+      </MenuButton>
+    )
 
   const ProfileOptionPopover = () => (
     <ProfileOptionContainer>
@@ -55,13 +64,15 @@ export const NavBar = (props: HTMLAttributes<HTMLDivElement>) => {
 
   return (
     <NavBarContainer {...props}>
-      <Title>ARCABOUÇO</Title>
+      <Link href={'/'}>
+        <Title>ARCABOUÇO</Title>
+      </Link>
 
       <MenuContainer>
         <Button label="Home" page="/"></Button>
         <Button label="Softwares" page="/app/softwares"></Button>
-        <Button label="Atividades" page="/app/activities"></Button>
-        <Button label="Sobre" page="/about"></Button>
+        <Button label="Atividades"></Button>
+        <Button label="Sobre"></Button>
 
         {user ? (
           <Popover

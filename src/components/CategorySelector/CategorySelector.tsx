@@ -1,4 +1,4 @@
-import { HTMLAttributes, useState } from 'react'
+import { HTMLAttributes, MouseEvent, useState } from 'react'
 import { TagCategory } from '../../api/interfaces/TagCategory'
 import {
   ApplyFilterButton,
@@ -25,32 +25,37 @@ type CategorySelectorProps = {
   onDone?: (categories: TagCategory[]) => void
   setIsOpened?: (isOpened: boolean) => void
   isOpened?: boolean
+  filteredCategories?: TagCategory[]
 } & HTMLAttributes<HTMLDivElement>
 
 export const CategorySelector = ({
   categories,
   setIsOpened = () => {},
-  onDone = () => {}
+  onDone = () => {},
+  filteredCategories = []
 }: CategorySelectorProps) => {
   const [currentTags, setCurrentTags] = useState([] as Tag[])
   const [currentCategory, setCurrentCategory] = useState<TagCategory | null>(
     null
   )
-  const [selectedCategories, setSelectedCategories] = useState(
-    [] as TagCategory[]
-  )
+  const [selectedCategories, setSelectedCategories] =
+    useState(filteredCategories)
 
-  const handleCategoryClick = (clickedCategory: TagCategory) => () => {
-    setCurrentCategory(clickedCategory)
-    const alreadySelectedTags = selectedCategories.find(
-      category => category.id === clickedCategory.id
-    )
+  const handleCategoryClick =
+    (clickedCategory: TagCategory) => (event: MouseEvent) => {
+      event.stopPropagation()
 
-    if (alreadySelectedTags) setCurrentTags(alreadySelectedTags.tags)
-    else setCurrentTags([])
-  }
+      setCurrentCategory(clickedCategory)
+      const alreadySelectedTags = selectedCategories.find(
+        category => category.id === clickedCategory.id
+      )
 
-  const handleTagClick = (clickedTag: Tag) => () => {
+      if (alreadySelectedTags) setCurrentTags(alreadySelectedTags.tags)
+      else setCurrentTags([])
+    }
+
+  const handleTagClick = (clickedTag: Tag) => (event: MouseEvent) => {
+    event.stopPropagation()
     const alreadySelected = currentTags.find(
       currentTag => currentTag.id === clickedTag.id
     )
@@ -62,7 +67,8 @@ export const CategorySelector = ({
     else setCurrentTags([...currentTags, clickedTag])
   }
 
-  const handleTagSelectionDone = () => {
+  const handleTagSelectionDone = (event: MouseEvent) => {
+    event.stopPropagation()
     if (!currentCategory) return
 
     const newSelectedCategory = { ...currentCategory }
@@ -80,15 +86,19 @@ export const CategorySelector = ({
     setSelectedCategories(newSelectedCategories)
   }
 
-  const handleApplyFilter = () => {
+  const handleApplyFilter = (event: MouseEvent) => {
+    event.stopPropagation()
     onDone(selectedCategories)
     setIsOpened(false)
   }
 
-  const handleResetFilter = () => {
+  const handleResetFilter = (event: MouseEvent) => {
+    event.stopPropagation()
     setSelectedCategories([])
     setCurrentTags([])
     setCurrentCategory(null)
+    onDone([])
+    setIsOpened(false)
   }
 
   return (

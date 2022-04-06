@@ -1,6 +1,7 @@
 import {
   FootInfo,
   Form,
+  FormContainer,
   Input,
   Label,
   LoginPageContainer,
@@ -17,6 +18,8 @@ import { useContext, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { TopBar } from '../../../../components/TopBar/TopBar'
 import { AuthContext } from '../../../../Context/Auth'
+import { NavBar } from '../../../../components/NavBar/NavBar'
+import { DefaultFooter } from '../../../../components/DefaultFooter/DefaultFooter'
 
 const SignupPage = () => {
   const route = useRouter()
@@ -60,60 +63,65 @@ const SignupPage = () => {
   return (
     <LoginPageContainer>
       <TopBar></TopBar>
+      {/* <NavBar></NavBar> */}
 
-      <Title>Entrar</Title>
+      <FormContainer>
+        <Title>Entrar</Title>
 
-      <Formik
-        initialValues={
-          {
-            name: '',
-            lastName: '',
-            email: '',
-            password: '',
-            rePassword: ''
-          } as FormSchema
-        }
-        onSubmit={handleSubmit}
-        validationSchema={formSchema}
-      >
-        {({ values, handleChange, handleSubmit, errors, touched }) => (
-          <Form onSubmit={handleSubmit}>
-            <Label>
-              E-mail
-              <Input
-                type={'email'}
-                name={'email'}
-                placeholder={'Digite aqui'}
-                onChange={handleChange}
-                value={values.email}
-              />
-            </Label>
-            <Warring>{errors.email && touched.email && errors.email}</Warring>
+        <Formik
+          initialValues={
+            {
+              name: '',
+              lastName: '',
+              email: '',
+              password: '',
+              rePassword: ''
+            } as FormSchema
+          }
+          onSubmit={handleSubmit}
+          validationSchema={formSchema}
+        >
+          {({ values, handleChange, handleSubmit, errors, touched }) => (
+            <Form onSubmit={handleSubmit}>
+              <Label>
+                E-mail
+                <Input
+                  type={'email'}
+                  name={'email'}
+                  placeholder={'Digite aqui'}
+                  onChange={handleChange}
+                  value={values.email}
+                />
+              </Label>
+              <Warring>{errors.email && touched.email && errors.email}</Warring>
 
-            <Label>
-              Senha
-              <Input
-                type={'password'}
-                name={'password'}
-                placeholder={'Digite aqui'}
-                onChange={handleChange}
-                value={values.password}
-              />
-            </Label>
-            <Warring>
-              {errors.password && touched.password && errors.password}
-            </Warring>
+              <Label>
+                Senha
+                <Input
+                  type={'password'}
+                  name={'password'}
+                  placeholder={'Digite aqui'}
+                  onChange={handleChange}
+                  value={values.password}
+                />
+              </Label>
+              <Warring>
+                {errors.password && touched.password && errors.password}
+              </Warring>
 
-            <SignupButton type="submit">Entrar</SignupButton>
-          </Form>
-        )}
-      </Formik>
+              <SignupButton type="submit">Entrar</SignupButton>
+            </Form>
+          )}
+        </Formik>
 
-      <Link href={'/'}>
-        <FootInfo>
-          Esqueceu sua senha? <br /> <b>Recuperar senha!</b>
-        </FootInfo>
-      </Link>
+        <Link href={'/'}>
+          <FootInfo>
+            Esqueceu sua senha? <br /> <b>Recuperar senha!</b>
+          </FootInfo>
+        </Link>
+      </FormContainer>
+
+      <DefaultFooter />
     </LoginPageContainer>
   )
 }

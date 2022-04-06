@@ -32,9 +32,7 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
 
   const logout = () => {
     setUser(null)
-    setCookie(null, 'arcabouco-token', '', {
-      maxAge: -1
-    })
+    setCookie(null, 'arcabouco-token', '')
   }
 
   return (

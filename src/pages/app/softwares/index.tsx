@@ -31,11 +31,17 @@ import { Popover } from 'react-tiny-popover'
 import { Request } from '../../../api'
 import { Software } from '../../../api/interfaces/Software'
 import { ScreenContext } from '../../../Context/Scheen'
+import { TagCategory } from '../../../api/interfaces/TagCategory'
 
 const SoftwareListPage = () => {
   const { isMobile } = useContext(ScreenContext)
 
   const [softwares, setSoftwares] = useState([] as Software[])
+
+  const [categories, setCategories] = useState([] as TagCategory[])
+  const [filteredCategories, setFilteredCategories] = useState(
+    [] as TagCategory[]
+  )
 
   const [isFilterOpen, setIsFilterOpen] = useState(false)
 
@@ -44,13 +50,12 @@ const SoftwareListPage = () => {
     else document.body.style.overflowY = 'visible'
   }, [isMobile, isFilterOpen])
 
-  const [categories] = useState(
-    Mock.randomArrayOf(() => Mock.TagCategory(true), 10, 20)
-  )
-
   useEffect(() => {
-    Request.listSoftwares().then(setSoftwares)
-  }, [])
+    Request.listSoftwares(filteredCategories).then(setSoftwares)
+    Request.listSoftwareCategories().then(({ softwareCategories }) =>
+      setCategories(softwareCategories)
+    )
+  }, [filteredCategories])
 
   return (
     <SoftwareListPageContainer noScroll={isFilterOpen}>
@@ -66,11 +71,13 @@ const SoftwareListPage = () => {
               <CategorySelector
                 categories={categories}
                 setIsOpened={setIsFilterOpen}
+                onDone={setFilteredCategories}
+                filteredCategories={filteredCategories}
               />
             }
             positions={['bottom', 'left']}
             isOpen={isFilterOpen}
-            onClickOutside={() => setIsFilterOpen(false)}
+            // onClickOutside={() => setIsFilterOpen(false)}
           >
             {isMobile ? (
               <>
