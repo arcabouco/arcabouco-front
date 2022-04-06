@@ -3,6 +3,7 @@ import { ArrowBack, KeyboardArrowDown } from 'styled-icons/material-sharp'
 import styled from 'styled-components'
 import { Add, Close } from 'styled-icons/material'
 import { media } from '../../../../utils/css'
+import ScrollContainer from 'react-indiana-drag-scroll'
 
 export const SoftwarePageContainer = styled.div`
   display: flex;
@@ -99,7 +100,7 @@ export const GalleryLabel = styled.h2`
   }
 `
 
-export const Gallery = styled.div`
+export const Gallery = styled(ScrollContainer)`
   display: flex;
   gap: 3vw;
   width: 100%;
@@ -117,8 +118,27 @@ export const Gallery = styled.div`
     height: 30rem;
     padding: 5%;
     border-radius: 0;
-    overflow-x: visible;
     gap: 1rem;
+
+    overflow-x: scroll;
+
+    cursor: grab;
+
+    user-select: none;
+
+    ::-webkit-scrollbar {
+      height: 0.4vw;
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: #f5f6fb;
+      border-radius: 100px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #e4e4e4;
+      border-radius: 100px;
+    }
   }
 `
 
@@ -132,10 +152,6 @@ export const ImageContainer = styled.div`
 
   border-radius: 0.5rem;
   background: #d9d9d9;
-
-  ${media.desktop} {
-    /* height: rem; */
-  }
 `
 
 export const RemoveImageIcon = styled(Close)`
