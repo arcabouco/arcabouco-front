@@ -2,6 +2,7 @@ import { ArrowBack, KeyboardArrowDown } from 'styled-icons/material-sharp'
 
 import styled from 'styled-components'
 import { Add, Close } from 'styled-icons/material'
+import { media } from '../../../../utils/css'
 
 export const SoftwarePageContainer = styled.div`
   display: flex;
@@ -9,8 +10,13 @@ export const SoftwarePageContainer = styled.div`
   align-items: center;
   justify-content: start;
   background: #e5e8ef;
-  width: 100vw;
   height: 100vh;
+
+  ${media.desktop} {
+    /* justify-content: end; */
+    gap: 0;
+    height: unset;
+  }
 `
 
 export const Header = styled.div`
@@ -19,12 +25,21 @@ export const Header = styled.div`
   width: 100%;
   height: min(20vw, 5rem);
   background: #e5e8ef;
+
+  ${media.desktop} {
+    height: 5rem;
+  }
 `
 
 export const PageTitle = styled.h1`
   font: 500 6vw Sora, sans-serif;
   color: #000;
   margin-bottom: 5vw;
+
+  ${media.desktop} {
+    font-size: 200%;
+    margin-bottom: 1rem;
+  }
 `
 
 export const Arrow = styled(ArrowBack)`
@@ -34,6 +49,10 @@ export const Arrow = styled(ArrowBack)`
 
   :active {
     color: #8695a0;
+  }
+
+  ${media.desktop} {
+    height: 3rem;
   }
 `
 
@@ -48,6 +67,15 @@ export const Main = styled.main`
   padding: 5vw 6vw 0 6vw;
   border-radius: 1.5rem 1.5rem 0 0;
   background: #fff;
+
+  ${media.desktop} {
+    width: 25vw;
+    min-width: 30rem;
+    background: #fff;
+    padding: 2%;
+    height: unset;
+    margin-bottom: 4rem;
+  }
 `
 
 export const GalleryContainer = styled.div`
@@ -65,6 +93,10 @@ export const GalleryLabel = styled.h2`
   text-align: left;
   color: #66696f;
   font: 400 4.8vw Sora, sans-serif;
+
+  ${media.desktop} {
+    font-size: 180%;
+  }
 `
 
 export const Gallery = styled.div`
@@ -79,6 +111,15 @@ export const Gallery = styled.div`
   overflow-x: scroll;
   scroll-behavior: smooth;
   scroll-snap-align: start end;
+
+  ${media.desktop} {
+    width: 100%;
+    height: 30rem;
+    padding: 5%;
+    border-radius: 0;
+    overflow-x: visible;
+    gap: 1rem;
+  }
 `
 
 export const ImageContainer = styled.div`
@@ -91,6 +132,10 @@ export const ImageContainer = styled.div`
 
   border-radius: 0.5rem;
   background: #d9d9d9;
+
+  ${media.desktop} {
+    /* height: rem; */
+  }
 `
 
 export const RemoveImageIcon = styled(Close)`
@@ -140,6 +185,10 @@ export const BasicInformationForm = styled.form`
   align-items: center;
   justify-content: center;
   width: 100%;
+
+  ${media.desktop} {
+    /* width: 75%; */
+  }
 `
 export const InputLabel = styled.label`
   display: flex;
@@ -148,6 +197,11 @@ export const InputLabel = styled.label`
   width: 100%;
   font: 400 4.8vw Sora, sans-serif;
   color: #66696f;
+
+  ${media.desktop} {
+    font-size: 140%;
+    gap: 0.8rem;
+  }
 `
 
 export const Warring = styled.span`
@@ -157,6 +211,11 @@ export const Warring = styled.span`
   color: #dc1212;
   width: 100%;
   height: 8vw;
+
+  ${media.desktop} {
+    font-size: 100%;
+    height: unset;
+  }
 `
 
 export const TitleInput = styled.input`
@@ -169,6 +228,16 @@ export const TitleInput = styled.input`
   ::placeholder {
     font: 400 4.4vw Sora, sans-serif;
     color: #dcdcdc;
+  }
+
+  ${media.desktop} {
+    font-size: 80%;
+    padding: 2% 0 2% 4%;
+    border-radius: 0.4rem;
+
+    ::placeholder {
+      font-size: 80%;
+    }
   }
 `
 
@@ -185,6 +254,17 @@ export const DescriptionInput = styled.textarea`
   overflow: hidden;
   min-height: 20vw;
   max-height: 100vw;
+
+  ${media.desktop} {
+    font-size: 80%;
+    padding: 2% 0 2% 4%;
+    border-radius: 0.4rem;
+    min-height: 10rem;
+
+    ::placeholder {
+      font-size: 80%;
+    }
+  }
 `
 
 export const LinkInput = styled.input`
@@ -198,6 +278,16 @@ export const LinkInput = styled.input`
     font: 400 3.5vw Sora, sans-serif;
     color: #dcdcdc;
   }
+
+  ${media.desktop} {
+    font-size: 80%;
+    padding: 2% 0 2% 4%;
+    border-radius: 0.4rem;
+
+    ::placeholder {
+      font-size: 80%;
+    }
+  }
 `
 
 export const FootInfo = styled.span`
@@ -209,6 +299,11 @@ export const FootInfo = styled.span`
   color: #66696f;
   b {
     color: #484aad;
+  }
+
+  ${media.desktop} {
+    font-size: 120%;
+    margin-bottom: 2rem;
   }
 `
 
@@ -226,5 +321,11 @@ export const SubmitButton = styled.button`
 
   :active {
     background: #0e2750;
+  }
+
+  ${media.desktop} {
+    font-size: 140%;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
   }
 `

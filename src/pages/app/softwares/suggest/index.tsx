@@ -34,6 +34,7 @@ import * as Yup from 'yup'
 import { Request } from '../../../../api'
 import { toast } from 'react-toastify'
 import { Formik, FormikHelpers } from 'formik'
+import { DefaultFooter } from '../../../../components/DefaultFooter/DefaultFooter'
 
 const SuggestSoftwareFormSchema = Yup.object({
   name: Yup.string().required('Título é obrigatório'),
@@ -197,6 +198,8 @@ const SoftwarePage = () => {
           )}
         </Formik>
       </Main>
+
+      <DefaultFooter />
     </SoftwarePageContainer>
   )
 }
